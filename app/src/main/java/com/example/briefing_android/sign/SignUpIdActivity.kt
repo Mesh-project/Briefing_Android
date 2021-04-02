@@ -1,11 +1,12 @@
-package com.example.briefing_android
+package com.example.briefing_android.sign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.briefing_android.R
 
-class MainActivity : AppCompatActivity() {
+class SignUpIdActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_sign_up_id)
     }
 }
