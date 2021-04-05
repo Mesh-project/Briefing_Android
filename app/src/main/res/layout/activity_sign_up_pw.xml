@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sign.SignUpIdActivity">
+    tools:context=".sign.SignUpPwActivity">
 
     <ImageButton
         android:id="@+id/ic_back"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="이메일 입력"/>
+        android:text="비밀번호 입력"/>
 
     <TextView
         style="@style/SignexTextView"
@@ -37,11 +37,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="이메일을 입력해주세요"/>
-
+        android:layout_marginTop="200dp"
+        android:text="비밀번호조건문:어쩌구저쩌구"/>
 
     <EditText
-        android:id="@+id/edit_up_email"
+        android:id="@+id/edit_in_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ex1"
@@ -49,8 +49,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="5dp"
-        android:hint="mesh@emai.com"
+        android:layout_marginTop="1dp"
+        android:hint="비밀번호 입력"
         />
 
     <ImageButton
@@ -58,17 +58,58 @@
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/ic_clear"
-        app:layout_constraintEnd_toEndOf="@id/edit_up_email"
-        app:layout_constraintBottom_toBottomOf="@id/edit_up_email"
+        app:layout_constraintEnd_toEndOf="@id/edit_in_pw"
+        app:layout_constraintBottom_toBottomOf="@id/edit_in_pw"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        style="@style/SignimporTextView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="296dp"
+        android:text="비밀번호 확인"/>
+
+    <TextView
+        style="@style/SignexTextView"
+        android:id="@+id/ex2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="360dp"
+        android:text="똑같이쓰세용"/>
+
+    <EditText
+        android:id="@+id/edit_in_pw2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ex2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="1dp"
+        android:hint="비밀번호 입력"
+        />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:src="@drawable/ic_clear"
+        app:layout_constraintEnd_toEndOf="@id/edit_in_pw2"
+        app:layout_constraintBottom_toBottomOf="@id/edit_in_pw2"
         android:layout_marginBottom="10dp"
         />
 
     <Button
+        style="@style/BtnGrayStyle"
         android:id="@+id/sign_up_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/BtnGrayOutlined"
-        android:text="계속하기" />
+        android:text="가입하기" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

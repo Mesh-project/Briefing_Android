@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.briefing_android.R
 
-class SingInIdActivity : AppCompatActivity() {
+class SignUpPwActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sing_in_id)
+        setContentView(R.layout.activity_sign_up_pw)
     }
 }

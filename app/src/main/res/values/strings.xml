@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">briefing_Android</string>
+    <string name="apptitle">briefing</string>
+    <string name="pw_input">비밀번호 입력</string>
 </resources>
