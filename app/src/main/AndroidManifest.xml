@@ -11,14 +11,14 @@
         android:theme="@style/Theme.Briefing_Android">
         <activity android:name=".history.HistoryActivity" />
         <activity android:name=".main.MainActivity">
-        </activity>
-        <activity android:name=".main.SummaryActivity" />
-        <activity android:name=".sign.SignInIdActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".main.SummaryActivity" />
+        <activity android:name=".sign.SignInIdActivity">
         </activity>
         <activity android:name=".sign.SignInPwActivity" />
         <activity android:name=".sign.SignUpPwActivity" />

@@ -22,11 +22,11 @@
 
     <TextView
         style="@style/SignexTextView"
-        android:id="@+id/ex1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="이메일을 입력해주세요"/>
+    android:id="@+id/ex1"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:text="이메일을 입력해주세요"/>
 
 
     <EditText

@@ -7,6 +7,6 @@ import com.example.briefing_android.R
 class HistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history)
+        setContentView(R.layout.fragment_slide_page_history)
     }
 }
