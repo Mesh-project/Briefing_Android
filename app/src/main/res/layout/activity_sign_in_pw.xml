@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".sign.SignInIdActivity">
+    tools:context=".sign.SignInPwActivity">
 
     <ImageButton
-        android:id="@+id/ic_back"
+        android:id="@+id/login_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -49,11 +49,12 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="5dp"
+        android:inputType="textPassword"
         android:hint="비밀번호 입력"
         />
 
     <ImageButton
-        android:id="@+id/clear_text"
+        android:id="@+id/clear_text2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#00000000"
@@ -86,16 +87,17 @@
         android:id="@+id/goto_forgotpw"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sign_in_btn"
+        app:layout_constraintBottom_toTopOf="@id/sign_in_btn2"
         android:layout_marginBottom="20dp"
         android:text="비밀번호를 잊으셨나요?"/>
 
     <Button
-        style="@style/BtnGrayStyle"
-        android:id="@+id/sign_in_btn"
+        style="@style/BtnStyle"
+        android:id="@+id/sign_in_btn2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:enabled="false"
         android:text="로그인" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

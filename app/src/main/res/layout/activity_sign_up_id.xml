@@ -7,7 +7,7 @@
     tools:context=".sign.SignUpIdActivity">
 
     <ImageButton
-        android:id="@+id/ic_back"
+        android:id="@+id/id_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -54,6 +54,7 @@
         />
 
     <ImageButton
+        android:id="@+id/clear_text3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#00000000"
@@ -64,11 +65,13 @@
         />
 
     <Button
-        android:id="@+id/sign_up_btn"
+        style="@style/BtnOutlined"
+        android:id="@+id/sign_up_btn1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/BtnGrayOutlined"
+        android:enabled="false"
+        android:textColor="@color/gray2"
         android:text="계속하기" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

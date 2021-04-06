@@ -7,7 +7,7 @@
     tools:context=".sign.SignUpPwActivity">
 
     <ImageButton
-        android:id="@+id/ic_back"
+        android:id="@+id/pw_back"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -41,7 +41,7 @@
         android:text="비밀번호조건문:어쩌구저쩌구"/>
 
     <EditText
-        android:id="@+id/edit_in_pw"
+        android:id="@+id/edit_up_pw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/ex1"
@@ -54,12 +54,13 @@
         />
 
     <ImageButton
+        android:id="@+id/clear_text4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/ic_clear"
-        app:layout_constraintEnd_toEndOf="@id/edit_in_pw"
-        app:layout_constraintBottom_toBottomOf="@id/edit_in_pw"
+        app:layout_constraintEnd_toEndOf="@id/edit_up_pw"
+        app:layout_constraintBottom_toBottomOf="@id/edit_up_pw"
         android:layout_marginBottom="10dp"
         />
 
@@ -73,7 +74,7 @@
 
     <TextView
         style="@style/SignexTextView"
-        android:id="@+id/ex2"
+        android:id="@+id/pw_confirm"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -81,10 +82,10 @@
         android:text="똑같이쓰세용"/>
 
     <EditText
-        android:id="@+id/edit_in_pw2"
+        android:id="@+id/edit_up_pw2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ex2"
+        app:layout_constraintTop_toBottomOf="@id/pw_confirm"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="30dp"
@@ -94,21 +95,23 @@
         />
 
     <ImageButton
+        android:id="@+id/clear_text5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:src="@drawable/ic_clear"
-        app:layout_constraintEnd_toEndOf="@id/edit_in_pw2"
-        app:layout_constraintBottom_toBottomOf="@id/edit_in_pw2"
+        app:layout_constraintEnd_toEndOf="@id/edit_up_pw2"
+        app:layout_constraintBottom_toBottomOf="@id/edit_up_pw2"
         android:layout_marginBottom="10dp"
         />
 
     <Button
-        style="@style/BtnGrayStyle"
-        android:id="@+id/sign_up_btn"
+        style="@style/BtnStyle"
+        android:id="@+id/sign_up_btn2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:enabled="false"
         android:text="가입하기" />
 
 

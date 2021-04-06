@@ -23,7 +23,7 @@
 
     <TextView
         style="@style/Signex2TextView"
-        android:id="@+id/goto_forgotpw"
+        android:id="@+id/goto_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
