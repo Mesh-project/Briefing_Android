@@ -14,4 +14,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <ToggleButton
+        android:id="@+id/btn_filter"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="#b6d3ff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="10dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

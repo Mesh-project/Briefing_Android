@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,16 +28,52 @@ class fragment_korean : Fragment(){
 
 
         var commentList = arrayListOf<CommentItem>(
-            CommentItem("kim","2020.01.01","wowww~",1),
-            CommentItem("yeo","2020.01.02","wowww~",37),
-            CommentItem("kang","2020.03.01","wowww~",10000),
-            CommentItem("na","2020.12.22","wowww~",777),
-            CommentItem("oh","2020.03.11","wowww~",3),
-            CommentItem("dong","2020.07.23","wowww~",43),
-            CommentItem("hu","2020.09.31","wowww~",55)
+            CommentItem("김","2020.01.01","멋지다~",1),
+            CommentItem("여","2020.01.02","슬프다~",37),
+            CommentItem("강","2020.03.01","나쁘다~",10000),
+            CommentItem("나","2020.12.22","이상하다~",777),
+            CommentItem("오","2020.03.11","좋다~",3),
+            CommentItem("동","2020.07.23","별로다~",43),
+            CommentItem("한","2020.09.31","멋지다~",55),
+                CommentItem("민","2020.01.01","멋지다~",1),
+                CommentItem("최","2020.01.02","멋지다~",37),
+                CommentItem("박","2020.03.01","멋지다~",10000),
+                CommentItem("이","2020.12.22","멋지다~",777),
+                CommentItem("윤","2020.03.11","좋다~",3),
+                CommentItem("민","2020.07.23","좋다~",43),
+                CommentItem("서","2020.09.31","좋다~",55)
+
         )
 
-        var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+        var malicious_commentList = arrayListOf<CommentItem>(
+                CommentItem("김","2020.01.01","악플~",1),
+                CommentItem("여","2020.01.02","악플~",37),
+                CommentItem("강","2020.03.01","악플~",10000),
+                CommentItem("나","2020.12.22","악플~",777),
+                CommentItem("오","2020.03.11","악플~",3),
+                CommentItem("동","2020.07.23","악플~",43),
+                CommentItem("후","2020.09.31","악플~",55),
+        )
+
+                var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+
+        var btn_filter : Button  = korean_listview.findViewById(R.id.btn_filter)
+        btn_filter.setOnClickListener(View.OnClickListener {
+           if(btn_filter.text.toString().equals("ON")){
+               mpadapter1.data=malicious_commentList
+               mp_datalist.add(mpadapter1.data)
+               mpadapter1.notifyDataSetChanged()
+
+           }
+           else{
+               mpadapter1.data=commentList
+               mp_datalist.add(mpadapter1.data)
+               mpadapter1.notifyDataSetChanged()
+
+           }
+
+        })
+
 
         //리사이클러뷰의 어댑터 세팅
         FKrecyclerview.adapter=mpadapter1
@@ -45,9 +82,9 @@ class fragment_korean : Fragment(){
         val lm = LinearLayoutManager(thiscontext)
         FKrecyclerview.layoutManager=lm
 
+
         mpadapter1.data=commentList
         mp_datalist.add(mpadapter1.data)
-
         mpadapter1.notifyDataSetChanged()
 
 
