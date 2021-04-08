@@ -8,20 +8,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Briefing_Android">
+        android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name=".sign.SingUpPwActivity"></activity>
         <activity android:name=".sign.SignUpIdActivity" />
         <activity android:name=".sign.SinginPwActivity" />
-        <activity android:name=".main.SummaryActivity" />
-        <activity android:name=".sign.SingInIdActivity" />
-        <activity android:name=".history.HistoryActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".main.SummaryActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".sign.SingInIdActivity" />
+        <activity android:name=".history.HistoryActivity" />
+        <activity android:name=".main.MainActivity"></activity>
     </application>
 
 </manifest>
