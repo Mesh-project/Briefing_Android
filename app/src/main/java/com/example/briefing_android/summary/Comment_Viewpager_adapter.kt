@@ -1,4 +1,4 @@
-package com.example.briefing_android.main
+package com.example.briefing_android.summary
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

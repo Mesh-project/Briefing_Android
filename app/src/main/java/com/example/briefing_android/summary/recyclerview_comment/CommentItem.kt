@@ -1,4 +1,4 @@
-package com.example.briefing_android.main.recyclerview_comment
+package com.example.briefing_android.summary.recyclerview_comment
 
 data class CommentItem (
     val it_username : String,

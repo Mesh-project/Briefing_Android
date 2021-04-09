@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import com.example.briefing_android.R
-import com.example.briefing_android.main.MainActivity
 
 class SignUpPwActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

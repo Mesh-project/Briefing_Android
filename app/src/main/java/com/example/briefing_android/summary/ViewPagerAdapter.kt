@@ -1,4 +1,4 @@
-package com.example.briefing_android.main
+package com.example.briefing_android.summary
 
 import android.content.Context
 import android.view.View

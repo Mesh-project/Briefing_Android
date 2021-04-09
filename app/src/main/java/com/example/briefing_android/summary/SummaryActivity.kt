@@ -1,13 +1,10 @@
-package com.example.briefing_android.main
+package com.example.briefing_android.summary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.briefing_android.R
-import com.example.briefing_android.main.recyclerview_comment.CommentItem
-import com.example.briefing_android.main.recyclerview_comment.rv_Adapter
 import com.google.android.material.tabs.TabLayout
 
 class SummaryActivity : AppCompatActivity() {
