@@ -23,6 +23,18 @@ class MainFragment : Fragment() {
     private lateinit var clear_url: ImageButton
     private lateinit var logout: TextView
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        var view = inflater.inflate(R.layout.fragment_slide_page_main, container, false)
+
+
+        return view
+        //return inflater.inflate(R.layout.fragment_slide_page_main, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -71,17 +83,5 @@ class MainFragment : Fragment() {
             // 실행할 액티비티가 이미 스택에 존재하면 해당 액티비티 위에 존재하는 다른 액티비티 모두 종료
             startActivity(Intent(getActivity(), SignInIdActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_slide_page_main, container, false)
-
-
-        return view
-        //return inflater.inflate(R.layout.fragment_slide_page_main, container, false)
     }
 }
