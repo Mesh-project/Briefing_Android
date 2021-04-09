@@ -11,14 +11,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
+import com.example.briefing_android.sign.SignInIdActivity
 import com.example.briefing_android.summary.SummaryActivity
 
 class MainFragment : Fragment() {
     private lateinit var edit_url: EditText
     private lateinit var btn_serach: Button
     private lateinit var clear_url: ImageButton
+    private lateinit var logout: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,6 +29,7 @@ class MainFragment : Fragment() {
         edit_url = view.findViewById(R.id.edit_url)
         clear_url = view.findViewById(R.id.clear_url)
         btn_serach = view.findViewById(R.id.btn_serach)
+        logout = view.findViewById(R.id.logout)
 
         //1. url 입력
         edit_url.addTextChangedListener(object : TextWatcher {
@@ -58,6 +62,14 @@ class MainFragment : Fragment() {
             // summary액티비티로 이동
             val intent = Intent(getActivity(), SummaryActivity::class.java)
             startActivity(intent)
+        }
+
+        // 4. 로그아웃 이벤트
+        logout.setOnClickListener {
+            //val intent = Intent(this, SignInIdActivity::class.java)
+            //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            // 실행할 액티비티가 이미 스택에 존재하면 해당 액티비티 위에 존재하는 다른 액티비티 모두 종료
+            startActivity(Intent(getActivity(), SignInIdActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
         }
     }
 

@@ -55,5 +55,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        style="@style/Signex2TextView"
+        android:id="@+id/logout"
+        app:layout_constraintLeft_toLefttOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        android:text="로그아웃"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
