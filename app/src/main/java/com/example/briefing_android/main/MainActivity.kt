@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
                 else -> HistoryFragment()
             }
         }
-        setContentView(R.layout.activity_main)
 
 
     }
