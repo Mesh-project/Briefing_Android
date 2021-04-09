@@ -24,12 +24,7 @@
         <activity android:name=".sign.SignUpPwActivity" />
         <activity android:name=".sign.SignUpIdActivity" />
         <activity android:name=".sign.SignUpSuccessActivity"/>
-        <activity android:name=".sign.SignUpIdActivity" />
-        <activity android:name=".sign.SinginPwActivity" />
-        <activity android:name=".main.SummaryActivity" ></activity>
-        <activity android:name=".sign.SingInIdActivity" />
-        <activity android:name=".history.HistoryActivity" />
-        <activity android:name=".main.MainActivity"></activity>
+
     </application>
 
 </manifest>
