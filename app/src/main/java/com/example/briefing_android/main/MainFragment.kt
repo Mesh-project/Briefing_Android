@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
+import com.example.briefing_android.summary.SummaryActivity
 
 class MainFragment : Fragment() {
     private lateinit var edit_url: EditText

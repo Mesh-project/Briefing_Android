@@ -11,7 +11,8 @@
         android:textColor="@color/colorMain"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/text_url"

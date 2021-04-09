@@ -1,4 +1,4 @@
-package com.example.briefing_android.main
+package com.example.briefing_android.summary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
-import com.example.briefing_android.main.recyclerview_comment.CommentItem
-import com.example.briefing_android.main.recyclerview_comment.rv_Adapter
+import com.example.briefing_android.summary.recyclerview_comment.CommentItem
+import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 class fragment_korean : Fragment(){
     private lateinit var  FKrecyclerview : RecyclerView

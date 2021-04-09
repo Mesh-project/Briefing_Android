@@ -1,4 +1,4 @@
-package com.example.briefing_android.main.recyclerview_comment
+package com.example.briefing_android.summary.recyclerview_comment
 
 import android.view.View
 import android.widget.TextView

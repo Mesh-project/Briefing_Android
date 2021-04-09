@@ -1,4 +1,4 @@
-package com.example.briefing_android.history
+package com.example.briefing_android.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
