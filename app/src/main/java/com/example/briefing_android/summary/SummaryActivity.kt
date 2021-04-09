@@ -1,13 +1,20 @@
 package com.example.briefing_android.summary
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.briefing_android.R
+import com.example.briefing_android.main.MainActivity
 import com.google.android.material.tabs.TabLayout
 
+
 class SummaryActivity : AppCompatActivity() {
+    private lateinit var btn_back: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
@@ -46,6 +53,14 @@ class SummaryActivity : AppCompatActivity() {
         comment_viewPager.adapter = commnt_fragmentAdapter
         comment_tablayout.setupWithViewPager(comment_viewPager)
 
+        btn_back = findViewById(R.id.btn_back)
+        // 1. 뒤로가기 버튼 이벤트
+        btn_back.setOnClickListener {
+            Log.d("11","11111")
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            Log.d("22","22222")
+        }
 
 
     }
