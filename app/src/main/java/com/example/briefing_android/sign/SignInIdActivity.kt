@@ -68,10 +68,13 @@ class SignInIdActivity : AppCompatActivity() {
 
         // 3. 계속하기 버튼 이벤트
         sign_in_btn.setOnClickListener {
-            // 3-1. 서버에 로그인 요청
+            // 3-1. 서버에 로그인 요청 -> 비밀번호까지입력하고나서 해야하므로
+            // 다음액티비티에 email액티비티 값 저장해서 전달.
+            val email = edit_in_email.text.toString()
 
             // 3-2. 성공 시 로그인 - 비밀번호 입력 창으로 넘어감
             val intent = Intent(this, SignInPwActivity::class.java)
+            intent.putExtra("email",email)
             startActivity(intent)
         }
 

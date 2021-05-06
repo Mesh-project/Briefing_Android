@@ -3,6 +3,7 @@ package com.example.briefing_android.main
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -28,5 +29,15 @@ class ht_Adapter(private val context: Context) : RecyclerView.Adapter<ht_ViewHol
     //바인드뷰홀더 생성
     override fun onBindViewHolder(holder: ht_ViewHolder, position: Int) {
         holder.bind(data[position])
+    }
+
+    // 클릭 이벤트
+    interface ItemClickListener{
+        fun onClick(view: View, position: Int)
+    }
+    //를릭 리스너
+    private lateinit var itemClickListner: ItemClickListener
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListner = itemClickListener
     }
 }
