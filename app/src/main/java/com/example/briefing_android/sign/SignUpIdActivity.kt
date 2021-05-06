@@ -8,9 +8,13 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.Toast
 import com.example.briefing_android.R
+import com.example.briefing_android.api.*
 
 class SignUpIdActivity : AppCompatActivity() {
+
+    var check: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_id)
@@ -63,9 +67,37 @@ class SignUpIdActivity : AppCompatActivity() {
         // 4. 계속하기 버튼 이벤트
         sign_up_btn.setOnClickListener {
             // 3-1. 서버에 이메일 중복확인 요청
+            /*
+            val callIdCheck = UserServiceImpl.IdCheckService.SignUpIdCheck(edit_up_email.getText().toString())
+            callIdCheck.safeEnqueue {
+                if (it.isSuccessful) {
+                    if (it.body()!!.status == 200) {
+                        check = 1
+                        Toast.makeText(
+                            this,
+                            "사용 가능한 이메일입니다.",
+                            android.widget.Toast.LENGTH_LONG
+                        ).show()
+
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "이미 등록된 이메일입니다. 다시 입력해주세요.",
+                            android.widget.Toast.LENGTH_LONG
+                        ).show()
+                        check = 0
+                    }
+                }
+            }
+            */
+            // 3-1. 서버에 회원가입 요청 -> 비밀번호까지입력하고나서 해야하므로
+            // 다음액티비티에 email 액티비티 값 저장해서 전달.
+            val email2 = edit_up_email.text.toString()
 
             // 3-2. 성공 시 회원가입 - 비밀번호 입력 창으로 넘어감
             val intent = Intent(this, SignUpPwActivity::class.java)
+            intent.putExtra("email2",email2)
+
             startActivity(intent)
         }
 

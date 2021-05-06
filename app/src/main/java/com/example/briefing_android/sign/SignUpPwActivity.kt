@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.util.Log
+import android.widget.*
 import com.example.briefing_android.R
+import com.example.briefing_android.api.*
+import com.example.briefing_android.main.MainActivity
 
 class SignUpPwActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,9 +84,25 @@ class SignUpPwActivity : AppCompatActivity() {
         //5. 가입하기 버튼 이벤트
         sign_up_btn2.setOnClickListener {
 
-            // 5-1. 클릭 시 회원가입 성공 화면으로 이동
-            val intent = Intent(this, SignUpSuccessActivity::class.java)
-            startActivity(intent)
+            // 전 액티비티에서 받아온 email값과 이 액티비티의 pw값을 서버에 보내줌
+            var email = intent.getStringExtra("email2")
+            var pw = edit_up_pw1.text.toString()
+
+            val callSignup = UserServiceImpl.SignUpService.requestSignUp(signupRequest = SignupRequest(email, pw))
+
+            callSignup.safeEnqueue(onResponse = {
+                Log.v("call", callSignup.toString()+callSignup.isExecuted.toString()+callSignup.request()+it.body().toString()+it.message().toString())
+                if(it.isSuccessful){
+                    Log.v("성공", it.message())
+                    Toast.makeText(this, "회원가입 성공", Toast.LENGTH_LONG)
+                    val login = Intent(this, SignUpSuccessActivity::class.java)
+                    startActivity(login)
+                }else{
+                    Log.v("회원가입 실패", "$$$$$$$$$$$$$$$$$$$$$$")
+                }
+            })
+
+
         }
 
     }
