@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.briefing_android.R
 import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
 import com.google.android.material.tabs.TabLayout
 
 
@@ -28,11 +29,16 @@ class SummaryActivity : AppCompatActivity() {
         var comment_tablayout = findViewById<TabLayout>(R.id.comment_tablayout)
 
         //그래프 뷰페이저
-        var viewpager = findViewById<ViewPager>(R.id.viewpager)
-        var viewpagerAdapter = ViewPagerAdapter(this)
-        viewpager.adapter=viewpagerAdapter
+//        var viewpager = findViewById<ViewPager>(R.id.viewpager)
+//        var viewpagerAdapter = ViewPagerAdapter(this)
+//        viewpager.adapter=viewpagerAdapter
 
-        viewpager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+        val graph_viewPager = findViewById<ViewPager>(R.id.viewpager)
+        val graph_fragmentAdapter = Graph_Viewpager_adapter(supportFragmentManager)
+        graph_viewPager.adapter = graph_fragmentAdapter
+
+
+        graph_viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
