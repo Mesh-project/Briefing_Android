@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    repositories{
+        maven {url "https://jitpack.io"}
+    }
 }
 
 dependencies {
@@ -45,6 +48,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.35.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'

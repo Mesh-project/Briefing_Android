@@ -12,6 +12,7 @@ class ViewPagerAdapter(private val context : Context) : PagerAdapter() {
             = arrayOf(R.drawable.ic_launcher_background,
                       R.drawable.ic_launcher_foreground) //그래프 이미지
 
+
     override fun getCount(): Int {
         return graphimg.size
     }
@@ -28,6 +29,8 @@ class ViewPagerAdapter(private val context : Context) : PagerAdapter() {
         }
         container.addView(imageView,0)
         return imageView
+//        container.addView(graphimg[position])
+//        return graphimg[position]
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
