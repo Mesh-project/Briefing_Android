@@ -2,7 +2,6 @@ package com.example.briefing_android.summary
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,19 @@ import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
-class fragment_korean : Fragment(){
+
+class fragment_korean(url:String) : Fragment(){
     private lateinit var  FKrecyclerview : RecyclerView
     private var mpadapter1: rv_Adapter = rv_Adapter(R.layout.comment_item)
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var commentList = arrayListOf<CommentItem>()
     var positive_commentList = arrayListOf<CommentItem>()
+    var videourl=url
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +38,18 @@ class fragment_korean : Fragment(){
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
         var thiscontext = container!!.getContext()
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
+
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
+            .build()
+
+//        val retrofit = Retrofit.Builder()
+//            .baseUrl("")
+//            .client(okHttpClient)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
 
         server(thiscontext)
 
@@ -63,7 +80,7 @@ class fragment_korean : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(videourl))
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
 
@@ -98,7 +115,7 @@ class fragment_korean : Fragment(){
     private fun positive_server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(videourl))
         callcommentpost.safeEnqueue {
             if(it.isSuccessful) {
                 val korean_positive_CommentList = it.body()!!.korean_data

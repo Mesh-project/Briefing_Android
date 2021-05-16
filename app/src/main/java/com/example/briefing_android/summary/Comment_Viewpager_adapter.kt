@@ -10,7 +10,7 @@ class Comment_Viewpager_adapter(fm: FragmentManager,url:String) : FragmentStateP
     override fun getItem(position: Int) :Fragment{
 
         return when (position) {
-            0 -> {fragment_korean()}
+            0 -> {fragment_korean(url)}
             1 -> {fragment_english(url)}
             else->{return fragment_etc(url)}
         }
