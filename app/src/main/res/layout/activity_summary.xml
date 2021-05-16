@@ -76,10 +76,10 @@
                 android:layout_marginBottom="5dp"
                 android:src="@drawable/ic_android_black_24dp"
                 app:layout_constraintBottom_toTopOf="@+id/btn_thumbnail"
-                app:layout_constraintRight_toLeftOf="@id/btn_channelname" />
+                app:layout_constraintRight_toLeftOf="@id/channelname" />
 
             <TextView
-                android:id="@+id/btn_channelname"
+                android:id="@+id/channelname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"

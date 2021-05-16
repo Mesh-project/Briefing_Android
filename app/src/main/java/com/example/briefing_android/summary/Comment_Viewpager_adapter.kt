@@ -1,16 +1,18 @@
 package com.example.briefing_android.summary
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 
-class Comment_Viewpager_adapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm)  {
-
+class Comment_Viewpager_adapter(fm: FragmentManager,url:String) : FragmentStatePagerAdapter(fm)  {
+    val url =url
     override fun getItem(position: Int) :Fragment{
+
         return when (position) {
             0 -> {fragment_korean()}
-            1 -> {fragment_english()}
-            else->{return fragment_etc()}
+            1 -> {fragment_english(url)}
+            else->{return fragment_etc(url)}
         }
     }
 

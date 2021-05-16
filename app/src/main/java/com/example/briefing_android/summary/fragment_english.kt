@@ -11,10 +11,10 @@ import com.example.briefing_android.R
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
-class fragment_english: Fragment(){
+class fragment_english(url:String) : Fragment(){
     private lateinit var  FENrecyclerview : RecyclerView
     private var mpadapter2: rv_Adapter = rv_Adapter(R.layout.comment_item)
-
+    var videourl = url
 
     override fun onCreateView(
         inflater: LayoutInflater,
