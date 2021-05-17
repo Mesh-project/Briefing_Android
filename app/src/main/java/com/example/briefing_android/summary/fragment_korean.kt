@@ -27,7 +27,7 @@ class fragment_korean(url:String) : Fragment(){
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var commentList = arrayListOf<CommentItem>()
     var positive_commentList = arrayListOf<CommentItem>()
-    var videourl=url
+    var url=url
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,11 +39,11 @@ class fragment_korean(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
 
-        val okHttpClient = OkHttpClient.Builder()
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(2, TimeUnit.MINUTES)
-            .writeTimeout(2, TimeUnit.MINUTES)
-            .build()
+//        val okHttpClient = OkHttpClient.Builder()
+//            .connectTimeout(1, TimeUnit.MINUTES)
+//            .readTimeout(2, TimeUnit.MINUTES)
+//            .writeTimeout(2, TimeUnit.MINUTES)
+//            .build()
 
 //        val retrofit = Retrofit.Builder()
 //            .baseUrl("")
@@ -80,7 +80,7 @@ class fragment_korean(url:String) : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(videourl))
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
 
@@ -94,10 +94,7 @@ class fragment_korean(url:String) : Fragment(){
                             it_likecount=korean_CommentList[i].likecount
                         )
                     )
-
-
                 }
-
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
                 //리사이클러뷰 배치
@@ -115,7 +112,7 @@ class fragment_korean(url:String) : Fragment(){
     private fun positive_server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(videourl))
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
         callcommentpost.safeEnqueue {
             if(it.isSuccessful) {
                 val korean_positive_CommentList = it.body()!!.korean_data

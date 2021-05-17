@@ -43,6 +43,22 @@ class SummaryActivity : AppCompatActivity() {
         var video_time :TextView = findViewById(R.id.time)
         var topic :TextView = findViewById(R.id.summary)
 
+        //-------------server-----------------
+        Log.v("summary","111111111")
+        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url))
+        analysispost.safeEnqueue {
+            if(it.isSuccessful){
+                Log.v("summary","22222222")
+                val VideoInfo = it.body()!!.data
+                channelname.setText(VideoInfo.title)
+                Glide.with(this).load(VideoInfo.thumnail).into(thumbnail)
+                video_time.setText(VideoInfo.video_time)
+                topic.setText(VideoInfo.topic)
+                Log.v("summary","333333333")
+            }
+        }
+        //---------------------------------------
+
         //그래프 뷰페이저
 //        var viewpager = findViewById<ViewPager>(R.id.viewpager)
 //        var viewpagerAdapter = ViewPagerAdapter(this)
@@ -51,7 +67,6 @@ class SummaryActivity : AppCompatActivity() {
         val graph_viewPager = findViewById<ViewPager>(R.id.viewpager)
         val graph_fragmentAdapter = Graph_Viewpager_adapter(supportFragmentManager)
         graph_viewPager.adapter = graph_fragmentAdapter
-
 
         graph_viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {}
@@ -87,22 +102,6 @@ class SummaryActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-
-
-        //-------------server-----------------
-        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url))
-
-        analysispost.safeEnqueue {
-            if(it.isSuccessful){
-                val VideoInfo = it.body()!!.data
-                channelname.setText(VideoInfo.title)
-                Glide.with(this).load(VideoInfo.thumnail).into(thumbnail)
-                video_time.setText(VideoInfo.video_time)
-                topic.setText(VideoInfo.topic)
-            }
-        }
-
-        //---------------------------------------
 
 
         thumbnail.setOnClickListener(View.OnClickListener {
