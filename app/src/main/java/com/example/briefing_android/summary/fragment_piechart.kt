@@ -1,11 +1,12 @@
 package com.example.briefing_android.summary
 
+import android.R.attr.name
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.utils.Easing
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
@@ -15,7 +16,6 @@ import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 
 
 class fragment_piechart : Fragment(){
@@ -31,8 +31,18 @@ class fragment_piechart : Fragment(){
         var piechart_layout = inflater.inflate(R.layout.fragment_piechart, container, false)
 
         var thiscontext = container!!.getContext()
+
         piechart = piechart_layout.findViewById(R.id.piechart)
         piechart2 = piechart_layout.findViewById(R.id.piechart2)
+
+
+        //-----server-------
+        //var bundle_value : String ?= null
+        //arguments?.let { bundle_value =it.getString("key") }
+
+        //val bundle_value = arguments?.getString("key")
+        //
+
 
         //piechart1
         piechart.setUsePercentValues(true)

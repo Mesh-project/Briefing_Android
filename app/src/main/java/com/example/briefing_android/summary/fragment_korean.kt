@@ -1,11 +1,18 @@
 package com.example.briefing_android.summary
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +34,10 @@ class fragment_korean(url:String) : Fragment(){
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var commentList = arrayListOf<CommentItem>()
     var positive_commentList = arrayListOf<CommentItem>()
-    var url=url
+    private var url=url
+    private lateinit var progressDialog: AppCompatDialog
+    private lateinit var  iv_frame_loading : ImageView
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,18 +49,8 @@ class fragment_korean(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
 
-//        val okHttpClient = OkHttpClient.Builder()
-//            .connectTimeout(1, TimeUnit.MINUTES)
-//            .readTimeout(2, TimeUnit.MINUTES)
-//            .writeTimeout(2, TimeUnit.MINUTES)
-//            .build()
 
-//        val retrofit = Retrofit.Builder()
-//            .baseUrl("")
-//            .client(okHttpClient)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-
+        progressON()
         server(thiscontext)
 
         var flag=0
@@ -58,6 +58,7 @@ class fragment_korean(url:String) : Fragment(){
         btn_filter.setOnClickListener(View.OnClickListener {
             if(btn_filter.text.toString().equals("ON")){
                 if(flag==0){
+                    progressON()
                     positive_server(thiscontext)
                     flag=1
                 }
@@ -73,6 +74,15 @@ class fragment_korean(url:String) : Fragment(){
 
         })
 
+        val bundle = Bundle()
+        bundle.putString("key", "value")
+        fragment_piechart().arguments = bundle
+        //Log.v("bundle",bundle.toString())
+//        fragmentManager?.beginTransaction()
+//                ?.replace(R.id.viewpager_area, fragment_piechart())
+//                ?.commit()
+        //val intent = Intent(thiscontext,SummaryActivity::class.java)
+        //intent.putExtra("key","value")
 
         return korean_listview
     }
@@ -80,10 +90,14 @@ class fragment_korean(url:String) : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
+
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest=CommentURLRequest(url))
+        Log.v("korean comment url1",url)
+
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
-
+                progressOFF()
+                Log.v("korean","11111111111")
                 val korean_CommentList = it.body()!!.korean_data
                 for(i in 0 until korean_CommentList.size){
                     commentList.add(
@@ -95,14 +109,15 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     )
                 }
+                Log.v("korean","22222222222222")
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
                 //리사이클러뷰 배치
                 val lm = LinearLayoutManager(thiscontext)
                 FKrecyclerview.layoutManager=lm
                 mpadapter1.data=commentList
-                mpadapter1.notifyDataSetChanged()
                 mp_datalist.add(mpadapter1.data)
+                Log.v("korean","3333333333333")
 
             }
         }
@@ -112,9 +127,10 @@ class fragment_korean(url:String) : Fragment(){
     private fun positive_server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("V1WHgI2xM2k"))
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(url))
         callcommentpost.safeEnqueue {
             if(it.isSuccessful) {
+                progressOFF()
                 val korean_positive_CommentList = it.body()!!.korean_data
                 for (i in 0 until korean_positive_CommentList.size) {
                     if (korean_positive_CommentList[i].predict.substring(11, 13).equals("긍정")) {
@@ -141,4 +157,26 @@ class fragment_korean(url:String) : Fragment(){
         }
         mpadapter1.notifyDataSetChanged()
     }
+
+    fun progressON(){
+        progressDialog = AppCompatDialog(this.context)
+        progressDialog.setCancelable(false)
+        progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.setContentView(R.layout.dialog_layout)
+        progressDialog.show()
+        var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.iv_frame_loading)
+        var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
+        img_loading_framge?.post(object : Runnable{
+            override fun run() {
+                frameAnimation.start()
+            }
+
+        })
+    }
+    fun progressOFF(){
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss()
+        }
+    }
+
 }

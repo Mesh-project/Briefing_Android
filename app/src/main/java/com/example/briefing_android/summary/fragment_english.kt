@@ -1,10 +1,15 @@
 package com.example.briefing_android.summary
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +24,7 @@ class fragment_english(url:String) : Fragment(){
     private lateinit var  FENrecyclerview : RecyclerView
     private var mpadapter2: rv_Adapter = rv_Adapter(R.layout.comment_item)
     var videourl = url
-    var commentList = arrayListOf<CommentItem>()
+    private lateinit var progressDialog: AppCompatDialog
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
 
     override fun onCreateView(
@@ -31,6 +36,7 @@ class fragment_english(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
+        //progressON()
         server(thiscontext)
 
         return english_listview
@@ -39,9 +45,10 @@ class fragment_english(url:String) : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter2.notifyDataSetChanged()
 
-        val english_comment_List= UserServiceImpl.CommentService.requestURL(CommentURLRequest("V1WHgI2xM2k"))
+        val english_comment_List= UserServiceImpl.CommentService.requestURL(CommentURLRequest(videourl))
         english_comment_List.safeEnqueue {
             if(it.isSuccessful){
+                //progressOFF()
                 var english_List = arrayListOf<CommentItem>()
                 val english__Comment = it.body()!!.etc_data
                 for(i in 0 until english__Comment.size){
@@ -70,5 +77,26 @@ class fragment_english(url:String) : Fragment(){
             }
         }
         mpadapter2.notifyDataSetChanged()
+    }
+
+    fun progressON(){
+        progressDialog = AppCompatDialog(this.context)
+        progressDialog.setCancelable(false)
+        progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.setContentView(R.layout.dialog_layout)
+        progressDialog.show()
+        var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.iv_frame_loading)
+        var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
+        img_loading_framge?.post(object : Runnable{
+            override fun run() {
+                frameAnimation.start()
+            }
+
+        })
+    }
+    fun progressOFF(){
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss()
+        }
     }
 }

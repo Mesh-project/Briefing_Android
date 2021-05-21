@@ -1,5 +1,6 @@
 package com.example.briefing_android.summary
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -42,22 +43,23 @@ class SummaryActivity : AppCompatActivity() {
         var thumbnail :ImageButton = findViewById(R.id.btn_thumbnail)
         var video_time :TextView = findViewById(R.id.time)
         var topic :TextView = findViewById(R.id.summary)
+        var title :TextView = findViewById(R.id.title)
 
         //-------------server-----------------
-        Log.v("summary","111111111")
         val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url))
         analysispost.safeEnqueue {
             if(it.isSuccessful){
-                Log.v("summary","22222222")
                 val VideoInfo = it.body()!!.data
-                channelname.setText(VideoInfo.title)
+                channelname.setText(VideoInfo.channel_name)
+                title.setText(VideoInfo.title)
                 Glide.with(this).load(VideoInfo.thumnail).into(thumbnail)
                 video_time.setText(VideoInfo.video_time)
                 topic.setText(VideoInfo.topic)
-                Log.v("summary","333333333")
             }
         }
         //---------------------------------------
+
+
 
         //그래프 뷰페이저
 //        var viewpager = findViewById<ViewPager>(R.id.viewpager)
@@ -110,5 +112,6 @@ class SummaryActivity : AppCompatActivity() {
             startActivity(intent)
         })
     }
+
 
 }
