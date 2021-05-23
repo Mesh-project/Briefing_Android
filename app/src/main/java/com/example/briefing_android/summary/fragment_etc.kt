@@ -42,7 +42,7 @@ class fragment_etc(url:String) : Fragment(){
 
 
         Log.v("url",url)
-        //progressON()
+        progressON()
         server(thiscontext)
 
 
@@ -52,7 +52,7 @@ class fragment_etc(url:String) : Fragment(){
         val callect_comment_List=UserServiceImpl.CommentService.requestURL(CommentURLRequest(url))
         callect_comment_List.safeEnqueue {
             if(it.isSuccessful){
-                //progressOFF()
+                progressOFF()
                 var ect_List = arrayListOf<CommentItem>()
                 val ect_Comment = it.body()!!.etc_data
                 for(i in 0 until ect_Comment.size){

@@ -1,12 +1,12 @@
 package com.example.briefing_android.summary
 
-import android.R.attr.name
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.utils.Easing
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
@@ -16,6 +16,7 @@ import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.utils.ColorTemplate
 
 
 class fragment_piechart : Fragment(){
@@ -24,24 +25,16 @@ class fragment_piechart : Fragment(){
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         var piechart_layout = inflater.inflate(R.layout.fragment_piechart, container, false)
 
         var thiscontext = container!!.getContext()
-
         piechart = piechart_layout.findViewById(R.id.piechart)
         piechart2 = piechart_layout.findViewById(R.id.piechart2)
 
-
-        //-----server-------
-        //var bundle_value : String ?= null
-        //arguments?.let { bundle_value =it.getString("key") }
-
-        //val bundle_value = arguments?.getString("key")
-        //
 
 
         //piechart1
@@ -63,7 +56,7 @@ class fragment_piechart : Fragment(){
 
         val description = Description()
         description.setText("Language") //라벨
-        description.setPosition(350f,30f)
+        description.setPosition(450f,40f)
         description.setTextSize(15f)
         piechart.setDescription(description)
 
@@ -86,6 +79,7 @@ class fragment_piechart : Fragment(){
         data.setValueTextSize(13f)
         data.setValueTextColor(Color.BLACK)
 
+        piechart.legend.isEnabled=false
         piechart.setData(data)
 
         //piechart2
@@ -107,7 +101,7 @@ class fragment_piechart : Fragment(){
 
         val description2 = Description()
         description2.setText("Emotion") //라벨
-        description2.setPosition(350f,30f)
+        description2.setPosition(450f,50f)
         description2.setTextSize(15f)
         piechart2.setDescription(description2)
 
@@ -127,7 +121,10 @@ class fragment_piechart : Fragment(){
         val data2 = PieData(dataSet2)
         data2.setValueTextSize(13f)
         data2.setValueTextColor(Color.BLACK)
+
+        piechart2.legend.isEnabled=false
         piechart2.setData(data2)
+
 
         return piechart_layout
     }

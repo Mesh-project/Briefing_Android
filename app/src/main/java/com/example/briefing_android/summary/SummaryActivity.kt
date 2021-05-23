@@ -99,13 +99,12 @@ class SummaryActivity : AppCompatActivity() {
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
         btn_back.setOnClickListener {
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-
         }
 
 
+        // 2. 유투브 영상으로 넘어가기
         thumbnail.setOnClickListener(View.OnClickListener {
             var Videourl = "https://www.youtube.com/watch?v=" + url
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse(Videourl))

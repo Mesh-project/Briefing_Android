@@ -1,7 +1,6 @@
 package com.example.briefing_android.summary
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -22,10 +22,6 @@ import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 
 class fragment_korean(url:String) : Fragment(){
@@ -37,6 +33,7 @@ class fragment_korean(url:String) : Fragment(){
     private var url=url
     private lateinit var progressDialog: AppCompatDialog
     private lateinit var  iv_frame_loading : ImageView
+
 
 
     override fun onCreateView(
@@ -74,16 +71,6 @@ class fragment_korean(url:String) : Fragment(){
 
         })
 
-        val bundle = Bundle()
-        bundle.putString("key", "value")
-        fragment_piechart().arguments = bundle
-        //Log.v("bundle",bundle.toString())
-//        fragmentManager?.beginTransaction()
-//                ?.replace(R.id.viewpager_area, fragment_piechart())
-//                ?.commit()
-        //val intent = Intent(thiscontext,SummaryActivity::class.java)
-        //intent.putExtra("key","value")
-
         return korean_listview
     }
 
@@ -98,6 +85,7 @@ class fragment_korean(url:String) : Fragment(){
             if(it.isSuccessful){
                 progressOFF()
                 Log.v("korean","11111111111")
+
                 val korean_CommentList = it.body()!!.korean_data
                 for(i in 0 until korean_CommentList.size){
                     commentList.add(

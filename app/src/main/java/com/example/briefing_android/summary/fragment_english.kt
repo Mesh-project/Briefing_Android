@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,9 @@ class fragment_english(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
-        //progressON()
+        progressON()
         server(thiscontext)
+
 
         return english_listview
 
@@ -48,7 +50,7 @@ class fragment_english(url:String) : Fragment(){
         val english_comment_List= UserServiceImpl.CommentService.requestURL(CommentURLRequest(videourl))
         english_comment_List.safeEnqueue {
             if(it.isSuccessful){
-                //progressOFF()
+                progressOFF()
                 var english_List = arrayListOf<CommentItem>()
                 val english__Comment = it.body()!!.etc_data
                 for(i in 0 until english__Comment.size){
