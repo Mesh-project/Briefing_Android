@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface analysisInter{
-    @POST("/api/ex/")
+    @POST("/api/analysis/")
     fun requestURL(
         @Body urlRequest: URLRequest
     ): Call<URLResponse>
