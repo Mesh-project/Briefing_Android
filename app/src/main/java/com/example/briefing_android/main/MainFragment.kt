@@ -22,6 +22,8 @@ class MainFragment : Fragment() {
     private lateinit var btn_serach: Button
     private lateinit var clear_url: ImageButton
     private lateinit var logout: TextView
+    private lateinit var url : String
+    private lateinit var urlcode : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +54,7 @@ class MainFragment : Fragment() {
                     btn_serach.isEnabled=true
                 }
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { // 입력 하기 전 작동
 
             }
@@ -69,10 +72,15 @@ class MainFragment : Fragment() {
             edit_url.setText("")
         }
 
+
+
         // 3. 검색 버튼 이벤트
         btn_serach.setOnClickListener {
             // summary액티비티로 이동
+            url =  edit_url.getText().toString()
+            urlcode = url.substring(32,url.length)
             val intent = Intent(getActivity(), SummaryActivity::class.java)
+            intent.putExtra("url",urlcode)
             startActivity(intent)
         }
 

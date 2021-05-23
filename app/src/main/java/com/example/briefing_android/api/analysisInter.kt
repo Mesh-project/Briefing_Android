@@ -13,8 +13,8 @@ interface analysisInter{
 }
 
 data class URLRequest(
-    @SerializedName("url")
-    val url : String
+   @SerializedName("url")
+   val url : String
 )
 
 data class URLResponse(
@@ -27,14 +27,20 @@ data class URLResponse(
 )
 
 data class analysis_info(
+    @SerializedName("user_idx")
+    val user_idx: String,
+    @SerializedName("url")
+    val url: String,
+    @SerializedName("analysis_date")
+    val analysis_date : String,
     @SerializedName("title")
     val title: String,
-    @SerializedName("author")
-    val author: String,
-    @SerializedName("published")
-    val published : String,
     @SerializedName("thumnail")
-    val thumnail: String,
-    @SerializedName("time")
-    val time : String
+    val thumnail : String,
+    @SerializedName("channel_name")
+    val channel_name: String,
+    @SerializedName("video_time")
+    val video_time : String,
+    @SerializedName("topic")
+    val topic : String
 )

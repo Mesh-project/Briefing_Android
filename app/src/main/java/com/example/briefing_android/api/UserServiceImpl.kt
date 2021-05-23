@@ -12,8 +12,9 @@ object UserServiceImpl {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    val SignInService: SigninInter = retrofit.create(SigninInter::class.java)
+    var SignInService: SigninInter = retrofit.create(SigninInter::class.java)
     val SignUpService: SignupInter = retrofit.create(SignupInter::class.java)
     val AnalysisService: analysisInter = retrofit.create(analysisInter::class.java)
+    val CommentService: CommentInter = retrofit.create(CommentInter::class.java)
     val HistoryService: HistoryInter = retrofit.create(HistoryInter::class.java)
 }
