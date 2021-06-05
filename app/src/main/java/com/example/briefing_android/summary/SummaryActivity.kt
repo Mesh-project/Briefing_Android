@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.briefing_android.R
@@ -92,8 +93,6 @@ class SummaryActivity : AppCompatActivity() {
         val commnt_fragmentAdapter = Comment_Viewpager_adapter(supportFragmentManager,url)
         comment_viewPager.adapter = commnt_fragmentAdapter
         comment_tablayout.setupWithViewPager(comment_viewPager)
-
-
 
 
         btn_back = findViewById(R.id.btn_back)

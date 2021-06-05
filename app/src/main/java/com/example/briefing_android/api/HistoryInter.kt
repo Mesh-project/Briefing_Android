@@ -5,11 +5,13 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface HistoryInter{
-    @GET("/api/history/")
+    @GET("/api/history/{user_idx}")
     fun responseHistory(
             //@Header("authorization") key : String // 토큰값
+        @Path("user_idx") user_idx: Int
     ): Call<HistoryResponse>
 }
 

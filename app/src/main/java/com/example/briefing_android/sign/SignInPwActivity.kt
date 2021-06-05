@@ -8,11 +8,11 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
+import androidx.lifecycle.ViewModelProvider
 import com.example.briefing_android.R
 import com.example.briefing_android.api.*
 
 import com.example.briefing_android.main.MainActivity
-
 
 
 class SignInPwActivity : AppCompatActivity() {
@@ -97,6 +97,7 @@ class SignInPwActivity : AppCompatActivity() {
 
                     // 메인화면으로 이동
                     val login = Intent(this, MainActivity::class.java)
+                    //login.putExtra("user_idx",it.body()!!.user_idx)
                     startActivity(login)
                 } else {
                     Log.v("로그인 실패", "$$$$$$$$$$$$$$$$$")

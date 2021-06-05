@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -27,6 +28,7 @@ class fragment_etc(url:String) : Fragment(){
     private var mpadapter3: rv_Adapter = rv_Adapter(R.layout.comment_item)
     private lateinit var progressDialog: AppCompatDialog
     private var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+    private lateinit var viewModel: SharedPiechartModel
 
     var url = url
 
@@ -40,6 +42,9 @@ class fragment_etc(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FErecyclerview = etc_listview.findViewById(R.id.etc_recyclerview)
 
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
+        Log.v("english댓글수 전달","444444")
+        viewModel.englishsize.value = 0 // 서버 실패 시험용
 
         Log.v("url",url)
         progressON()
@@ -84,7 +89,7 @@ class fragment_etc(url:String) : Fragment(){
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(true)
         progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.dialog_layout)
         progressDialog.show()

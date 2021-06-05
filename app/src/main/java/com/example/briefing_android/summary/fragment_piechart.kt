@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.utils.Easing
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.briefing_android.R
 import com.github.mikephil.charting.animation.Easing.EaseInOutCubic
 import com.github.mikephil.charting.charts.PieChart
@@ -22,20 +24,25 @@ import com.github.mikephil.charting.utils.ColorTemplate
 class fragment_piechart : Fragment(){
     private lateinit var piechart : PieChart
     private lateinit var piechart2 : PieChart
-
+    private lateinit var viewModel: SharedPiechartModel
+    private var koreansize: Int = 0 // 한국어댓글수
+    private var englishsize: Int = 100
+    private var etcsize: Int = 0
+    private var positivesize: Int = 0
+    private var negativesize: Int = 0
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
         var piechart_layout = inflater.inflate(R.layout.fragment_piechart, container, false)
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(SharedPiechartModel::class.java)
 
         var thiscontext = container!!.getContext()
         piechart = piechart_layout.findViewById(R.id.piechart)
         piechart2 = piechart_layout.findViewById(R.id.piechart2)
-
-
 
         //piechart1
         piechart.setUsePercentValues(true)
@@ -50,9 +57,27 @@ class fragment_piechart : Fragment(){
 
         val yValues = ArrayList<PieEntry>()
 
-        yValues.add(PieEntry(15f, "한국어"))
-        yValues.add(PieEntry(45f, "영어"))
-        yValues.add(PieEntry(50f, "기타"))
+        viewModel.koreansize.observe(this, Observer{
+            koreansize = it
+            yValues.add(PieEntry(koreansize.toFloat(), "한국어"))
+            Log.v("piechart koreansize 확인","1111111//"+it) // 뷰모델에서 값 잘 받아왔는지 확인
+        })
+        Log.v("piechart koreansize 확인","22222//"+koreansize) // koreansize에 저장 되었는지 확인
+
+        viewModel.englishsize.observe(this, Observer{
+            englishsize = it
+            yValues.add(PieEntry(englishsize.toFloat(), "영어"))
+            Log.v("piechart englishsize 확인","1111111//"+it) // 뷰모델에서 값 잘 받아왔는지 확인
+        })
+        Log.v("piechart englishsize 확인","22222//"+englishsize) // koreansize에 저장 되었는지 확인
+
+        viewModel.etcsize.observe(this, Observer{
+            etcsize = it
+            yValues.add(PieEntry(etcsize.toFloat(), "기타"))
+            Log.v("piechart etcsize 확인","1111111//"+it) // 뷰모델에서 값 잘 받아왔는지 확인
+        })
+        Log.v("piechart etcsize 확인","22222//"+englishsize) // koreansize에 저장 되었는지 확인
+
 
         val description = Description()
         description.setText("Language") //라벨

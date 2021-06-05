@@ -14,6 +14,8 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -33,8 +35,7 @@ class fragment_korean(url:String) : Fragment(){
     private var url=url
     private lateinit var progressDialog: AppCompatDialog
     private lateinit var  iv_frame_loading : ImageView
-
-
+    private lateinit var viewModel: SharedPiechartModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,10 +43,14 @@ class fragment_korean(url:String) : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
+        //Log.v("korean댓글수 전달","444444")
+        //viewModel.koreansize.value = 100 // 서버 실패 시험용
+
+
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
         var thiscontext = container!!.getContext()
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
-
 
         progressON()
         server(thiscontext)
@@ -77,7 +82,6 @@ class fragment_korean(url:String) : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
-
         val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest=CommentURLRequest(url))
         Log.v("korean comment url1",url)
 
@@ -87,6 +91,9 @@ class fragment_korean(url:String) : Fragment(){
                 Log.v("korean","11111111111")
 
                 val korean_CommentList = it.body()!!.korean_data
+                Log.v("korean댓글수 전달","444444")
+                viewModel.koreansize.value = korean_CommentList.size // viewmodel에 korean댓글 수 넣음.
+                Log.v("koreansize 서버"+korean_CommentList.size,"--------------")
                 for(i in 0 until korean_CommentList.size){
                     commentList.add(
                         CommentItem(
@@ -97,6 +104,7 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     )
                 }
+
                 Log.v("korean","22222222222222")
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
@@ -132,6 +140,7 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     }
                 }
+
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter = mpadapter1
 
@@ -148,7 +157,7 @@ class fragment_korean(url:String) : Fragment(){
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(true)
         progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.dialog_layout)
         progressDialog.show()

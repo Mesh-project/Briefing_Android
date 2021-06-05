@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -27,6 +28,8 @@ class fragment_english(url:String) : Fragment(){
     var videourl = url
     private lateinit var progressDialog: AppCompatDialog
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+    private var koreansize: Int = 0
+    private lateinit var viewModel: SharedPiechartModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,9 +40,12 @@ class fragment_english(url:String) : Fragment(){
         var thiscontext = container!!.getContext()
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
+        Log.v("english댓글수 전달","444444")
+        //viewModel.englishsize.value = 0 // 서버 실패 시험용
+
         progressON()
         server(thiscontext)
-
 
         return english_listview
 
@@ -83,7 +89,7 @@ class fragment_english(url:String) : Fragment(){
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(true)
         progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.dialog_layout)
         progressDialog.show()

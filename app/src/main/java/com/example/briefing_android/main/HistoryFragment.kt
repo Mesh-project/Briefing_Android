@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -16,6 +17,7 @@ import com.example.briefing_android.api.HistoryData
 import com.example.briefing_android.api.SharedPreferenceController
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
+import com.example.briefing_android.sign.UserIdApplication
 import com.example.briefing_android.summary.SummaryActivity
 
 class HistoryFragment : Fragment() {
@@ -25,6 +27,8 @@ class HistoryFragment : Fragment() {
     var myhistorylist =ArrayList<ArrayList<ListItem>>()
     var myhistroylist_server = arrayListOf<HistoryData>()
     lateinit var mContext: Context
+     private var user_idx: Int = 0
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -48,7 +52,7 @@ class HistoryFragment : Fragment() {
     // server
     fun server(thiscontext: Context) {
         token = SharedPreferenceController.getUserToken(thiscontext)
-        val callHistory = UserServiceImpl.HistoryService.responseHistory()
+        val callHistory = UserServiceImpl.HistoryService.responseHistory(user_idx)
         callHistory.safeEnqueue {
             if (it.isSuccessful) {
                 Log.v("히스토리 서버 연결", "성공")

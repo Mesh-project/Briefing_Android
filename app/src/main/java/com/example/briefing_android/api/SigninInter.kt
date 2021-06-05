@@ -27,6 +27,6 @@ data class SigninResponse(
     val status: Int,
     @SerializedName("message")
     val message: String,
-    @SerializedName("token")
-    val token: String
+    @SerializedName("user_idx")
+    val user_idx: Int
 )
