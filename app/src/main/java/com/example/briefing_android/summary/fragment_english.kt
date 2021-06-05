@@ -87,7 +87,7 @@ class fragment_english(url:String) : Fragment(){
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(true)
         progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.dialog_layout)
         progressDialog.show()
