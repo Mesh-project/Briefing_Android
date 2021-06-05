@@ -22,7 +22,9 @@ import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
+import com.example.briefing_android.main.MainActivity
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
+import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 
@@ -51,6 +53,7 @@ class fragment_korean(url:String) : Fragment(){
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
         var thiscontext = container!!.getContext()
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
+
 
         progressON()
         server(thiscontext)
@@ -82,6 +85,7 @@ class fragment_korean(url:String) : Fragment(){
     private fun server(thiscontext: Context){
         mpadapter1.notifyDataSetChanged()
 
+
         val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest=CommentURLRequest(url))
         Log.v("korean comment url1",url)
 
@@ -104,7 +108,6 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     )
                 }
-
                 Log.v("korean","22222222222222")
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
@@ -140,7 +143,6 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     }
                 }
-
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter = mpadapter1
 
@@ -150,6 +152,9 @@ class fragment_korean(url:String) : Fragment(){
                 mpadapter1.data = positive_commentList
                 mpadapter1.notifyDataSetChanged()
                 mp_datalist.add(mpadapter1.data)
+            }
+            else{
+                progressOFF()
             }
         }
         mpadapter1.notifyDataSetChanged()
@@ -165,6 +170,8 @@ class fragment_korean(url:String) : Fragment(){
         var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
         img_loading_framge?.post(object : Runnable{
             override fun run() {
+                frameAnimation.setEnterFadeDuration(2000)
+                frameAnimation.setExitFadeDuration(3000)
                 frameAnimation.start()
             }
 

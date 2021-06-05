@@ -28,8 +28,6 @@ class fragment_english(url:String) : Fragment(){
     var videourl = url
     private lateinit var progressDialog: AppCompatDialog
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
-    private var koreansize: Int = 0
-    private lateinit var viewModel: SharedPiechartModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +44,7 @@ class fragment_english(url:String) : Fragment(){
 
         progressON()
         server(thiscontext)
+
 
         return english_listview
 
@@ -82,6 +81,9 @@ class fragment_english(url:String) : Fragment(){
                 mpadapter2.notifyDataSetChanged()
                 mp_datalist.add(mpadapter2.data)
 
+            }
+            else{
+                progressOFF()
             }
         }
         mpadapter2.notifyDataSetChanged()

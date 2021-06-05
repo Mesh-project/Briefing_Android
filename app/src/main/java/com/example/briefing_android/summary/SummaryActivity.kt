@@ -27,10 +27,12 @@ class SummaryActivity : AppCompatActivity() {
     private lateinit var btn_back: ImageButton
     lateinit var url: String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
-
+        var user_idx: Int
+        user_idx = 1
         url = intent.getStringExtra("url")
         Log.d("url value= ",url)
 
@@ -47,18 +49,33 @@ class SummaryActivity : AppCompatActivity() {
         var title :TextView = findViewById(R.id.title)
 
         //-------------server-----------------
-        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url))
+        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url,user_idx))
         analysispost.safeEnqueue {
             if(it.isSuccessful){
+                val longtilte : String
                 val VideoInfo = it.body()!!.data
                 channelname.setText(VideoInfo.channel_name)
-                title.setText(VideoInfo.title)
-                Glide.with(this).load(VideoInfo.thumnail).into(thumbnail)
+                if(VideoInfo.title.length>45){
+                    longtilte = VideoInfo.title.substring(0,45) + "..."
+                    title.setText(longtilte)
+                }else{
+                    title.setText(VideoInfo.title)
+                }
+                Glide.with(this)
+                        .load(VideoInfo.thumnail)
+                        .override(1500,600)
+                        .into(thumbnail)
                 video_time.setText(VideoInfo.video_time)
                 topic.setText(VideoInfo.topic)
             }
         }
         //---------------------------------------
+
+
+        //댓글창 프래그먼트 뷰페이저
+        val commnt_fragmentAdapter = Comment_Viewpager_adapter(supportFragmentManager,url)
+        comment_viewPager.adapter = commnt_fragmentAdapter
+        comment_tablayout.setupWithViewPager(comment_viewPager)
 
 
 

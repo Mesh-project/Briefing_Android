@@ -36,9 +36,7 @@ class fragment_piechart : Fragment(){
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-
         var piechart_layout = inflater.inflate(R.layout.fragment_piechart, container, false)
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(SharedPiechartModel::class.java)
 
         var thiscontext = container!!.getContext()
         piechart = piechart_layout.findViewById(R.id.piechart)

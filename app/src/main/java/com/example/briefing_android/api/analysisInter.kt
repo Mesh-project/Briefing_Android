@@ -14,7 +14,9 @@ interface analysisInter{
 
 data class URLRequest(
    @SerializedName("url")
-   val url : String
+   val url : String,
+   @SerializedName("user_idx")
+   val user_idx : Int
 )
 
 data class URLResponse(
@@ -28,7 +30,7 @@ data class URLResponse(
 
 data class analysis_info(
     @SerializedName("user_idx")
-    val user_idx: String,
+    val user_idx: Int,
     @SerializedName("url")
     val url: String,
     @SerializedName("analysis_date")

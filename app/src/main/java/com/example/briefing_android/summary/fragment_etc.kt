@@ -83,6 +83,9 @@ class fragment_etc(url:String) : Fragment(){
                 mpadapter3.notifyDataSetChanged()
                 mp_datalist.add(mpadapter3.data)
             }
+            else{
+                progressOFF()
+            }
         }
         mpadapter3.notifyDataSetChanged()
     }

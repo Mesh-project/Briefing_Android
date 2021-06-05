@@ -16,4 +16,5 @@ class Graph_Viewpager_adapter(fm: FragmentManager) : FragmentStatePagerAdapter(f
     override fun getCount(): Int {
         return 2
     }
+
 }
