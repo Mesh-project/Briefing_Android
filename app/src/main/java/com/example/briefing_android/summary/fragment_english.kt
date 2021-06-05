@@ -5,12 +5,12 @@ import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
+import androidx.core.view.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +36,7 @@ class fragment_english(url:String) : Fragment(){
         var english_listview = inflater.inflate(R.layout.english_list, container, false)
         var thiscontext = container!!.getContext()
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
+
 
         progressON()
         server(thiscontext)
@@ -77,6 +78,9 @@ class fragment_english(url:String) : Fragment(){
                 mp_datalist.add(mpadapter2.data)
 
             }
+            else{
+                progressOFF()
+            }
         }
         mpadapter2.notifyDataSetChanged()
     }
@@ -89,11 +93,11 @@ class fragment_english(url:String) : Fragment(){
         progressDialog.show()
         var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.iv_frame_loading)
         var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
+
         img_loading_framge?.post(object : Runnable{
             override fun run() {
                 frameAnimation.start()
             }
-
         })
     }
     fun progressOFF(){

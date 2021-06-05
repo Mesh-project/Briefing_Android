@@ -1,6 +1,7 @@
 package com.example.briefing_android.summary
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
@@ -20,7 +21,9 @@ import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
+import com.example.briefing_android.main.MainActivity
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
+import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 
@@ -49,6 +52,14 @@ class fragment_korean(url:String) : Fragment(){
 
         progressON()
         server(thiscontext)
+
+//        val bundle = Bundle()
+//        bundle.putString("key", "value")
+//        fragment_piechart().arguments = bundle
+//        Log.v("bundle",bundle.toString())
+
+
+
 
         var flag=0
         var btn_filter : Button = korean_listview.findViewById(R.id.btn_filter)
@@ -84,7 +95,6 @@ class fragment_korean(url:String) : Fragment(){
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
                 progressOFF()
-                Log.v("korean","11111111111")
 
                 val korean_CommentList = it.body()!!.korean_data
                 for(i in 0 until korean_CommentList.size){
@@ -97,7 +107,9 @@ class fragment_korean(url:String) : Fragment(){
                         )
                     )
                 }
-                Log.v("korean","22222222222222")
+
+
+
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
                 //리사이클러뷰 배치
@@ -105,7 +117,6 @@ class fragment_korean(url:String) : Fragment(){
                 FKrecyclerview.layoutManager=lm
                 mpadapter1.data=commentList
                 mp_datalist.add(mpadapter1.data)
-                Log.v("korean","3333333333333")
 
             }
         }
@@ -142,13 +153,16 @@ class fragment_korean(url:String) : Fragment(){
                 mpadapter1.notifyDataSetChanged()
                 mp_datalist.add(mpadapter1.data)
             }
+            else{
+                progressOFF()
+            }
         }
         mpadapter1.notifyDataSetChanged()
     }
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)
-        progressDialog.setCancelable(false)
+        progressDialog.setCancelable(true)
         progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.dialog_layout)
         progressDialog.show()
@@ -156,7 +170,10 @@ class fragment_korean(url:String) : Fragment(){
         var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
         img_loading_framge?.post(object : Runnable{
             override fun run() {
+                frameAnimation.setEnterFadeDuration(2000)
+                frameAnimation.setExitFadeDuration(3000)
                 frameAnimation.start()
+
             }
 
         })

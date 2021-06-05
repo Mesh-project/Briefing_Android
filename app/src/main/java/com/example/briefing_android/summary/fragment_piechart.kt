@@ -35,7 +35,14 @@ class fragment_piechart : Fragment(){
         piechart = piechart_layout.findViewById(R.id.piechart)
         piechart2 = piechart_layout.findViewById(R.id.piechart2)
 
-
+        //------------------------
+        if(arguments != null){
+            val bundle_value = arguments?.getString("key")
+            Log.v("파이차트에서 받은 key=",bundle_value)
+        }else{
+            Log.v("파이차트에서 받은 key=","null")
+        }
+        //------------------------
 
         //piechart1
         piechart.setUsePercentValues(true)
