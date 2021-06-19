@@ -22,6 +22,8 @@ data class CommentURLResponse(
     val status: Int,
     @SerializedName("message")
     val message: String,
+    @SerializedName("count")
+    val count : List<Int>,
     @SerializedName("korean_data")
     val korean_data : List<korean_data>,
     @SerializedName("etc_data")

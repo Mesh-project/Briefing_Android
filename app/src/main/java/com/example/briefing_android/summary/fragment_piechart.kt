@@ -170,9 +170,9 @@ class fragment_piechart : Fragment(){
         piechart2.setData(data2)
 
 
-            if(event_btn.isClickable){
-                event_btn.isInvisible=true
-            }
+//            if(event_btn.isClickable){
+//                event_btn.isInvisible=true
+//            }
         }
         )
 

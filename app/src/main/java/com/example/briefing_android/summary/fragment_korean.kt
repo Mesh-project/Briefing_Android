@@ -91,6 +91,7 @@ class fragment_korean(url:String) : Fragment(){
 
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
+                Log.v("한국어 서버","성공")
                 progressOFF()
                 Log.v("korean","11111111111")
 
@@ -133,7 +134,7 @@ class fragment_korean(url:String) : Fragment(){
                 val korean_positive_CommentList = it.body()!!.korean_data
                 viewModel.positivesize.value = korean_positive_CommentList.size // viewmodel에 korean댓글 수 넣음.
                 for (i in 0 until korean_positive_CommentList.size) {
-                    if (korean_positive_CommentList[i].predict.substring(11, 13).equals("긍정")) {
+                    if (korean_positive_CommentList[i].predict.equals("긍정")) {
                         positive_commentList.add(
                             CommentItem(
                                 it_username = korean_positive_CommentList[i].nickname,
@@ -170,7 +171,7 @@ class fragment_korean(url:String) : Fragment(){
 
                 var p_count =0
                 for (i in 0 until korean_positive_CommentList.size) {
-                    if (korean_positive_CommentList[i].predict.substring(11, 13).equals("긍정")) {
+                    if (korean_positive_CommentList[i].predict.equals("긍정")) {
                        p_count++
                     }
                 }

@@ -55,6 +55,7 @@ class fragment_english(url:String) : Fragment(){
         english_comment_List.safeEnqueue {
             if(it.isSuccessful){
                 progressOFF()
+                Log.v("영어 서버","성공")
                 var english_List = arrayListOf<CommentItem>()
                 val english__Comment = it.body()!!.etc_data
 

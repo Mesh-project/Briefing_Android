@@ -57,6 +57,7 @@ class fragment_etc(url:String) : Fragment(){
         callect_comment_List.safeEnqueue {
             if(it.isSuccessful){
                 progressOFF()
+                Log.v("기타 서버","성공")
                 var ect_List = arrayListOf<CommentItem>()
                 val ect_Comment = it.body()!!.etc_data
 
