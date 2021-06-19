@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.briefing_android.R
-import com.example.briefing_android.sign.UserIdApplication
+import com.example.briefing_android.sign.MySharedPreferences
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 private const val NUM_PAGES = 2 // 페이지 수를 정해둠
@@ -17,16 +16,11 @@ private const val NUM_PAGES = 2 // 페이지 수를 정해둠
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
-    private lateinit var viewModel: UserIdApplication
+    private lateinit var viewModel: MySharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // 콘텐츠 뷰를 ViewPager2가 있는 레이아웃응로 설정
-
-        if(intent.hasExtra("user_idx")){
-            var user_idx = intent.getIntExtra("user_idx",0)
-            Log.v("mainactivity"+user_idx,"--------------")
-        }
 
         //viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()) .get(UserIdApplication::class.java)
         //viewModel.user_idx.value = 1 // viewmodel에 user_idx 값 넣음

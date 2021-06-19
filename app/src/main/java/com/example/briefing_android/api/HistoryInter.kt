@@ -23,8 +23,8 @@ data class HistoryResponse(
 )
 
 data class HistoryData(
-        @SerializedName("id")
-        val id: Int,
+        @SerializedName("analysis_idx")
+        val analysis_idx: Int,
         @SerializedName("user_idx")
         val user_idx: Int,
         @SerializedName("url")
