@@ -28,6 +28,7 @@ class fragment_english(url:String) : Fragment(){
     var videourl = url
     private lateinit var progressDialog: AppCompatDialog
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+    private lateinit var viewModel: SharedPiechartModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,8 +40,6 @@ class fragment_english(url:String) : Fragment(){
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
         viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
-        Log.v("english댓글수 전달","444444")
-        //viewModel.englishsize.value = 0 // 서버 실패 시험용
 
         progressON()
         server(thiscontext)
@@ -58,6 +57,8 @@ class fragment_english(url:String) : Fragment(){
                 progressOFF()
                 var english_List = arrayListOf<CommentItem>()
                 val english__Comment = it.body()!!.etc_data
+
+                var cnt = 0
                 for(i in 0 until english__Comment.size){
                     if(english__Comment[i].sort.equals("영어")){
                         english_List.add(
@@ -68,8 +69,11 @@ class fragment_english(url:String) : Fragment(){
                                         it_likecount=english__Comment[i].likecount
                                 )
                         )
+                        cnt++
                     }
                 }
+                viewModel.englishsize.value = cnt// viewmodel에 댓글 수 넣음.
+                viewModel.etcsize.value = english__Comment.size-cnt
                 //리사이클러뷰의 어댑터 세팅
                 FENrecyclerview.adapter=mpadapter2
 

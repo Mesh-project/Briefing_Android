@@ -39,6 +39,7 @@ class fragment_korean(url:String) : Fragment(){
     private lateinit var  iv_frame_loading : ImageView
     private lateinit var viewModel: SharedPiechartModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,8 +47,6 @@ class fragment_korean(url:String) : Fragment(){
     ): View? {
 
         viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
-        //Log.v("korean댓글수 전달","444444")
-        //viewModel.koreansize.value = 100 // 서버 실패 시험용
 
 
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
@@ -57,6 +56,7 @@ class fragment_korean(url:String) : Fragment(){
 
         progressON()
         server(thiscontext)
+        positive_server_count(thiscontext)
 
         var flag=0
         var btn_filter : Button = korean_listview.findViewById(R.id.btn_filter)
@@ -131,6 +131,7 @@ class fragment_korean(url:String) : Fragment(){
             if(it.isSuccessful) {
                 progressOFF()
                 val korean_positive_CommentList = it.body()!!.korean_data
+                viewModel.positivesize.value = korean_positive_CommentList.size // viewmodel에 korean댓글 수 넣음.
                 for (i in 0 until korean_positive_CommentList.size) {
                     if (korean_positive_CommentList[i].predict.substring(11, 13).equals("긍정")) {
                         positive_commentList.add(
@@ -159,6 +160,26 @@ class fragment_korean(url:String) : Fragment(){
         }
         mpadapter1.notifyDataSetChanged()
     }
+
+    private fun positive_server_count(thiscontext: Context){
+        val callcommentpost = UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(url))
+        callcommentpost.safeEnqueue {
+            if(it.isSuccessful) {
+                progressOFF()
+                val korean_positive_CommentList = it.body()!!.korean_data
+
+                var p_count =0
+                for (i in 0 until korean_positive_CommentList.size) {
+                    if (korean_positive_CommentList[i].predict.substring(11, 13).equals("긍정")) {
+                       p_count++
+                    }
+                }
+                viewModel.positivesize.value = p_count // viewmodel에 긍정댓글 수 넣음.
+            }
+
+        }
+    }
+
 
     fun progressON(){
         progressDialog = AppCompatDialog(this.context)

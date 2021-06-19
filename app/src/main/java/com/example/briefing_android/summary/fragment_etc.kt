@@ -38,28 +38,29 @@ class fragment_etc(url:String) : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
+
         var etc_listview = inflater.inflate(R.layout.etc_list, container, false)
         var thiscontext = container!!.getContext()
         FErecyclerview = etc_listview.findViewById(R.id.etc_recyclerview)
-
         viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
-        Log.v("english댓글수 전달","444444")
-        viewModel.englishsize.value = 0 // 서버 실패 시험용
 
-        Log.v("url",url)
+
         progressON()
         server(thiscontext)
-
 
         return etc_listview
     }
     private fun server(thiscontext: Context){
+        mpadapter3.notifyDataSetChanged()
+
         val callect_comment_List=UserServiceImpl.CommentService.requestURL(CommentURLRequest(url))
         callect_comment_List.safeEnqueue {
             if(it.isSuccessful){
                 progressOFF()
                 var ect_List = arrayListOf<CommentItem>()
                 val ect_Comment = it.body()!!.etc_data
+
+                var cnt =0
                 for(i in 0 until ect_Comment.size){
                     if(ect_Comment[i].sort.equals("그외")){
                         ect_List.add(
@@ -70,8 +71,10 @@ class fragment_etc(url:String) : Fragment(){
                                         it_likecount=ect_Comment[i].likecount
                                 )
                         )
+                        cnt++
                     }
                 }
+                //viewModel.etcsize.value = cnt// viewmodel에 댓글 수 넣음.
                 //리사이클러뷰의 어댑터 세팅
                 FErecyclerview.adapter=mpadapter3
 

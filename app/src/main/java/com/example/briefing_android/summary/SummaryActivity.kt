@@ -48,8 +48,12 @@ class SummaryActivity : AppCompatActivity() {
         var topic :TextView = findViewById(R.id.summary)
         var title :TextView = findViewById(R.id.title)
 
+
+
         //-------------server-----------------
-        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(url,user_idx))
+        var anal_str = "https://www.youtube.com/watch?v="+url
+        Log.v("str url값",anal_str)
+        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(anal_str,user_idx))
         analysispost.safeEnqueue {
             if(it.isSuccessful){
                 val longtilte : String
@@ -70,14 +74,6 @@ class SummaryActivity : AppCompatActivity() {
             }
         }
         //---------------------------------------
-
-
-        //댓글창 프래그먼트 뷰페이저
-        val commnt_fragmentAdapter = Comment_Viewpager_adapter(supportFragmentManager,url)
-        comment_viewPager.adapter = commnt_fragmentAdapter
-        comment_tablayout.setupWithViewPager(comment_viewPager)
-
-
 
         //그래프 뷰페이저
 //        var viewpager = findViewById<ViewPager>(R.id.viewpager)

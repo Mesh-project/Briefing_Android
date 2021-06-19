@@ -11,6 +11,6 @@ class SharedPiechartModel : ViewModel(){
     var englishsize = MutableLiveData<Int>()
     var etcsize = MutableLiveData<Int>()
     var positivesize = MutableLiveData<Int>()
-    var negativesize = MutableLiveData<Int>()
+    //var negativesize = MutableLiveData<Int>()
 
 }

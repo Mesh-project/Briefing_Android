@@ -12,7 +12,7 @@ class Comment_Viewpager_adapter(fm: FragmentManager,url:String) : FragmentStateP
         return when (position) {
             0 -> {fragment_korean(url)}
             1 -> {fragment_english(url)}
-            else->{return fragment_etc(url)}
+            else->{fragment_etc(url)}
         }
     }
 
@@ -24,7 +24,7 @@ class Comment_Viewpager_adapter(fm: FragmentManager,url:String) : FragmentStateP
         return when (position){
             0 -> "한국어"
             1 -> "영어"
-            else->{return "etc."}
+            else->"etc."
         }
 
     }
