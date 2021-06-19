@@ -1,6 +1,7 @@
 package com.example.briefing_android.sign
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -28,6 +29,7 @@ class SignInPwActivity : AppCompatActivity() {
         val check_pw: CheckBox = findViewById(R.id.check_pw)
         val sign_in_btn2: Button = findViewById(R.id.sign_in_btn2)
         val clear_text: ImageButton = findViewById(R.id.clear_text2)
+
 
         //1. 이전 화면 돌아가기
         login_back.setOnClickListener {
@@ -95,9 +97,11 @@ class SignInPwActivity : AppCompatActivity() {
                     SharedPreferenceController.setUserToken(this, loginData)
                     Log.v("로그인성공!!!!!!!", loginData)
 
+                    MySharedPreferences.setUserIdx(this, it.body()!!.user_idx.toString())
                     // 메인화면으로 이동
                     val login = Intent(this, MainActivity::class.java)
-                    //login.putExtra("user_idx",it.body()!!.user_idx)
+                    Log.v("signinpwactivity : user_idx전달!!!!!!!", ""+it.body()!!.user_idx)
+
                     startActivity(login)
                 } else {
                     Log.v("로그인 실패", "$$$$$$$$$$$$$$$$$")

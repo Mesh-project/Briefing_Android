@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -17,7 +15,7 @@ import com.example.briefing_android.api.HistoryData
 import com.example.briefing_android.api.SharedPreferenceController
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
-import com.example.briefing_android.sign.UserIdApplication
+import com.example.briefing_android.sign.MySharedPreferences
 import com.example.briefing_android.summary.SummaryActivity
 
 class HistoryFragment : Fragment() {
@@ -27,8 +25,7 @@ class HistoryFragment : Fragment() {
     var myhistorylist =ArrayList<ArrayList<ListItem>>()
     var myhistroylist_server = arrayListOf<HistoryData>()
     lateinit var mContext: Context
-     private var user_idx: Int = 0
-
+    private var user_idx: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -36,6 +33,9 @@ class HistoryFragment : Fragment() {
 
         //var thiscontext = container!!.getContext()
         rv = view.findViewById(R.id.history_recyclerView)
+
+        user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
+        Log.v("histroyfragment 확인","user_idx"+user_idx)
 
         server(mContext)
 
@@ -62,7 +62,7 @@ class HistoryFragment : Fragment() {
                 for (i in 0 until myhistory.size) {
                     hitoryList.add(
                             ListItem(
-                                    ht_id = myhistory[i].id,
+                                    ht_id = myhistory[i].analysis_idx,
                                     ht_url = myhistory[i].url,
                                     ht_thumbnail = myhistory[i].thumbnail,
                                     ht_title = myhistory[i].title,
