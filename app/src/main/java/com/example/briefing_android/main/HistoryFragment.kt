@@ -25,7 +25,7 @@ class HistoryFragment : Fragment() {
     var myhistorylist =ArrayList<ArrayList<ListItem>>()
     var myhistroylist_server = arrayListOf<HistoryData>()
     lateinit var mContext: Context
-    private var user_idx: Int = 0
+    private var user_idx: Int = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -34,7 +34,7 @@ class HistoryFragment : Fragment() {
         //var thiscontext = container!!.getContext()
         rv = view.findViewById(R.id.history_recyclerView)
 
-        user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
+        //user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
         Log.v("histroyfragment 확인","user_idx"+user_idx)
 
         server(mContext)
