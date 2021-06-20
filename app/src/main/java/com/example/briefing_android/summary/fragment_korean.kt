@@ -32,8 +32,6 @@ class fragment_korean(url:String) : Fragment(){
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var commentList = arrayListOf<CommentItem>()
     var positive_commentList = arrayListOf<CommentItem>()
-    var ect_List = arrayListOf<CommentItem>()
-    var english_List = arrayListOf<CommentItem>()
     private var url=url
     private lateinit var progressDialog: AppCompatDialog
     private lateinit var  iv_frame_loading : ImageView
@@ -106,10 +104,6 @@ class fragment_korean(url:String) : Fragment(){
                 val korean_CommentList = it.body()!!.korean_data
 
                 Log.v("intent","크기 데이터 보냄")
-
-
-                //viewModel.koreansize.value = korean_CommentList.size // viewmodel에 korean댓글 수 넣음.
-                //Log.v("koreansize 서버"+korean_CommentList.size,"--------------")
 
 
                 val english__Comment = it.body()!!.etc_data
