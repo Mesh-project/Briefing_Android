@@ -3,7 +3,7 @@
     <!-- Background -->
 
     <solid
-        android:color="#00000000"/>
+        android:color="#FFFFFF"/>
     <stroke
         android:width="2dp"
         android:color="#0066FF"

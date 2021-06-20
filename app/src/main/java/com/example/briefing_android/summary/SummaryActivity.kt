@@ -22,6 +22,7 @@ import com.example.briefing_android.api.URLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.sign.MySharedPreferences
 import com.example.briefing_android.sign.SignUpIdActivity
 import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
@@ -55,6 +56,9 @@ class SummaryActivity : AppCompatActivity() {
         anal_str = "https://www.youtube.com/watch?v=" + url
         Log.d("1.url value= ",url)
         Log.d("2.url value= ",anal_str)
+
+        user_idx = MySharedPreferences.getUserIdx(this).toInt()
+        Log.v("summaryactivity 확인","user_idx"+user_idx)
 
         var btn_comment : Button = findViewById(R.id.btn_comment)
 
@@ -116,8 +120,7 @@ class SummaryActivity : AppCompatActivity() {
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
         btn_back.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
 
@@ -151,7 +154,7 @@ class SummaryActivity : AppCompatActivity() {
                 }
                 Glide.with(this)
                     .load(VideoInfo.thumnail)
-                    .override(1500,600)
+                    .override(1000,450)
                     .into(thumbnail)
                 video_time.setText(VideoInfo.video_time)
                 topic.setText(VideoInfo.topic)

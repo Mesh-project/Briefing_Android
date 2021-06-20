@@ -25,6 +25,7 @@ class SignInIdActivity : AppCompatActivity() {
 
         val colorMain = getColor(R.color.colorMain)
         val gray2 = getColor(R.color.gray2)
+        val white = getColor(R.color.white)
 
         // 1. 이메일 입력 이벤트
         // 1-1. 이메일 형식이 맞는지 확인?
@@ -36,7 +37,7 @@ class SignInIdActivity : AppCompatActivity() {
                     sign_in_btn.setTextColor(gray2)
                 } else {  //버튼 활성화
                     sign_in_btn.isEnabled=true
-                    sign_in_btn.setTextColor(colorMain)
+                    sign_in_btn.setTextColor(white)
                 }
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { // 입력 하기 전 작동

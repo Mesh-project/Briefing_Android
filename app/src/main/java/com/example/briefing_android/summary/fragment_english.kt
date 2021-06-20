@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,9 +46,10 @@ class fragment_english(url:String) : Fragment(){
         server(thiscontext)
 
 
+
         return english_listview
 
-  }
+    }
     private fun server(thiscontext: Context){
         mpadapter2.notifyDataSetChanged()
 
@@ -63,12 +65,12 @@ class fragment_english(url:String) : Fragment(){
                 for(i in 0 until english__Comment.size){
                     if(english__Comment[i].sort.equals("영어")){
                         english_List.add(
-                                CommentItem(
-                                        it_username=english__Comment[i].nickname,
-                                        it_date=english__Comment[i].writetime.substring(0,10),
-                                        it_comment=english__Comment[i].comment,
-                                        it_likecount=english__Comment[i].likecount
-                                )
+                            CommentItem(
+                                it_username=english__Comment[i].nickname,
+                                it_date=english__Comment[i].writetime.substring(0,10),
+                                it_comment=english__Comment[i].comment,
+                                it_likecount=english__Comment[i].likecount
+                            )
                         )
                         cnt++
                     }

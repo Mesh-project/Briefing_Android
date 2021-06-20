@@ -34,7 +34,7 @@ class HistoryFragment : Fragment() {
         //var thiscontext = container!!.getContext()
         rv = view.findViewById(R.id.history_recyclerView)
 
-        //user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
+        user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
         Log.v("histroyfragment 확인","user_idx"+user_idx)
 
         server(mContext)
@@ -61,14 +61,14 @@ class HistoryFragment : Fragment() {
 
                 for (i in 0 until myhistory.size) {
                     hitoryList.add(
-                            ListItem(
-                                    ht_id = myhistory[i].analysis_idx,
-                                    ht_url = myhistory[i].url,
-                                    ht_thumbnail = myhistory[i].thumbnail,
-                                    ht_title = myhistory[i].title,
-                                    ht_analysis_date = myhistory[i].analysis_date,
-                                    ht_channel_name = myhistory[i].channel_name
-                            )
+                        ListItem(
+                            ht_id = myhistory[i].analysis_idx,
+                            ht_url = myhistory[i].url,
+                            ht_thumbnail = myhistory[i].thumbnail,
+                            ht_title = myhistory[i].title,
+                            ht_analysis_date = myhistory[i].analysis_date,
+                            ht_channel_name = myhistory[i].channel_name
+                        )
                     )
                     myhistroylist_server = myhistory as ArrayList<HistoryData>
                 }
@@ -82,16 +82,17 @@ class HistoryFragment : Fragment() {
                 rv_adapter.notifyDataSetChanged()
                 myhistorylist.add(rv_adapter.data)
 
+                rv_adapter.setItemClickListener(object : ht_Adapter.ItemClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        // summary액티비티로 이동
+                        val intent = Intent(getActivity(), SummaryActivity::class.java)
+                        intent.putExtra("url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
+                        startActivity(intent)
+                    }
+                })
+
             }
         }
-        rv_adapter.setItemClickListener(object : ht_Adapter.ItemClickListener {
-            override fun onClick(view: View, position: Int) {
-                // summary액티비티로 이동
-                Log.v("summary액티비티로 이동", "성공")
-                val intent = Intent(getActivity(), SummaryActivity::class.java)
-                startActivity(intent)
-            }
-        })
 
     }
 

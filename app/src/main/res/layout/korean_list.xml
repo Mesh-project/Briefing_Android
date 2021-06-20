@@ -18,11 +18,13 @@
         android:id="@+id/btn_filter"
         android:layout_width="60dp"
         android:layout_height="30dp"
-        android:background="#b6d3ff"
+        android:background="@drawable/btn_outlined"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:textSize="10dp"/>
+        android:textSize="10dp"
+        android:textOff="악플 OFF"
+        android:textOn="악플 ON"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

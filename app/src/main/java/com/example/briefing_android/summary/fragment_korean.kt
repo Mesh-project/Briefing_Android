@@ -62,7 +62,7 @@ class fragment_korean(url:String) : Fragment(){
         var flag=0
         var btn_filter : Button = korean_listview.findViewById(R.id.btn_filter)
         btn_filter.setOnClickListener(View.OnClickListener {
-            if(btn_filter.text.toString().equals("ON")){
+            if(btn_filter.text.toString().equals("악플 ON")){
                 if(flag==0){
                     progressON()
                     positive_server(thiscontext)

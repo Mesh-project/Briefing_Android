@@ -86,7 +86,7 @@ class SignInPwActivity : AppCompatActivity() {
             var email = intent.getStringExtra("email")
             var pw = edit_in_pw.text.toString()
 
-            val callLogin = UserServiceImpl.SignInService.requestSignIn(signinRequest = SigninRequest("test", "1234"))
+            val callLogin = UserServiceImpl.SignInService.requestSignIn(signinRequest = SigninRequest(email, pw))
 
             callLogin.safeEnqueue(onResponse =
             {

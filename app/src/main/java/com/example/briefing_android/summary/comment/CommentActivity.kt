@@ -157,8 +157,7 @@ class CommentActivity : AppCompatActivity() {
         var backbutton : ImageButton = findViewById(R.id.backbutton)
         // 1. 뒤로가기 버튼 이벤트
             backbutton.setOnClickListener {
-            val intent = Intent(this, SummaryActivity::class.java)
-                startActivity(intent)
+            finish()
         }
     }
 }
