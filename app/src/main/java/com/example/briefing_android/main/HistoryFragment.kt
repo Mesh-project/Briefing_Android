@@ -61,14 +61,14 @@ class HistoryFragment : Fragment() {
 
                 for (i in 0 until myhistory.size) {
                     hitoryList.add(
-                        ListItem(
-                            ht_id = myhistory[i].analysis_idx,
-                            ht_url = myhistory[i].url,
-                            ht_thumbnail = myhistory[i].thumbnail,
-                            ht_title = myhistory[i].title,
-                            ht_analysis_date = myhistory[i].analysis_date,
-                            ht_channel_name = myhistory[i].channel_name
-                        )
+                            ListItem(
+                                    ht_id = myhistory[i].analysis_idx,
+                                    ht_url = myhistory[i].url,
+                                    ht_thumbnail = myhistory[i].thumbnail,
+                                    ht_title = myhistory[i].title,
+                                    ht_analysis_date = myhistory[i].analysis_date,
+                                    ht_channel_name = myhistory[i].channel_name
+                            )
                     )
                     myhistroylist_server = myhistory as ArrayList<HistoryData>
                 }
@@ -86,13 +86,11 @@ class HistoryFragment : Fragment() {
                     override fun onClick(view: View, position: Int) {
                         // summary액티비티로 이동
                         val intent = Intent(getActivity(), SummaryActivity::class.java)
-                        intent.putExtra("url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
+                        //intent.putExtra("history_url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
+                        intent.putExtra("analysis_idx",hitoryList[position].ht_id) // history 서버에서 히스토리 id값받아서 전달
                         startActivity(intent)
                     }
                 })
-
-            }
-        }
 
     }
 

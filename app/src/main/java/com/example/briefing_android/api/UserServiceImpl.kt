@@ -29,4 +29,5 @@ object UserServiceImpl {
     val AnalysisService: analysisInter = retrofit.create(analysisInter::class.java)
     val CommentService: CommentInter = retrofit.create(CommentInter::class.java)
     val HistoryService: HistoryInter = retrofit.create(HistoryInter::class.java)
+    val HistroyDetailService : History_DetailInter= retrofit.create(History_DetailInter::class.java)
 }
