@@ -15,7 +15,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
-import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.briefing_android.R
 import com.example.briefing_android.api.URLRequest

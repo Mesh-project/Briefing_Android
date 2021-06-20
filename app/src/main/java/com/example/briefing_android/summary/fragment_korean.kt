@@ -1,10 +1,12 @@
 package com.example.briefing_android.summary
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +16,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,9 +23,8 @@ import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
-import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
-import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 
@@ -35,6 +34,8 @@ class fragment_korean(url:String) : Fragment(){
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var commentList = arrayListOf<CommentItem>()
     var positive_commentList = arrayListOf<CommentItem>()
+    var ect_List = arrayListOf<CommentItem>()
+    var english_List = arrayListOf<CommentItem>()
     private var url=url
     private lateinit var progressDialog: AppCompatDialog
     private lateinit var  iv_frame_loading : ImageView
@@ -62,20 +63,24 @@ class fragment_korean(url:String) : Fragment(){
         var flag=0
         var btn_filter : Button = korean_listview.findViewById(R.id.btn_filter)
         btn_filter.setOnClickListener(View.OnClickListener {
-            if(btn_filter.text.toString().equals("ON")){
-                if(flag==0){
-                    progressON()
-                    positive_server(thiscontext)
-                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
-                    t1.show()
-                    flag=1
-                }
-                else{
-                    mpadapter1.data=positive_commentList
-                    mpadapter1.notifyDataSetChanged()
-                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
-                    t1.show()
-                }
+            if(btn_filter.text.toString().equals("악플 ON")){
+//                if(flag==0){
+//                    progressON()
+//                    positive_server(thiscontext)
+//                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
+//                    t1.show()
+//                    flag=1
+//                }
+//                else{
+//                    mpadapter1.data=positive_commentList
+//                    mpadapter1.notifyDataSetChanged()
+//                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
+//                    t1.show()
+//                }
+                mpadapter1.data=positive_commentList
+                mpadapter1.notifyDataSetChanged()
+                var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
+                t1.show()
             }
             else{
                 mpadapter1.data=commentList
@@ -98,14 +103,19 @@ class fragment_korean(url:String) : Fragment(){
 
         callcommentpost.safeEnqueue {
             if(it.isSuccessful){
-                Log.v("한국어 서버","성공")
+                Log.v("댓글 서버(한국어)","성공")
                 progressOFF()
-                Log.v("korean","11111111111")
-
                 val korean_CommentList = it.body()!!.korean_data
-                Log.v("korean댓글수 전달","444444")
-                viewModel.koreansize.value = korean_CommentList.size // viewmodel에 korean댓글 수 넣음.
-                Log.v("koreansize 서버"+korean_CommentList.size,"--------------")
+
+                Log.v("intent","크기 데이터 보냄")
+
+
+                //viewModel.koreansize.value = korean_CommentList.size // viewmodel에 korean댓글 수 넣음.
+                //Log.v("koreansize 서버"+korean_CommentList.size,"--------------")
+
+
+                val english__Comment = it.body()!!.etc_data
+                //한국어
                 for(i in 0 until korean_CommentList.size){
                     commentList.add(
                         CommentItem(
@@ -115,8 +125,48 @@ class fragment_korean(url:String) : Fragment(){
                             it_likecount=korean_CommentList[i].likecount
                         )
                     )
+                    if (korean_CommentList[i].predict.equals("긍정")) {
+                        positive_commentList.add(
+                                CommentItem(
+                                        it_username = korean_CommentList[i].nickname,
+                                        it_date = korean_CommentList[i].writetime.substring(0, 10),
+                                        it_comment = korean_CommentList[i].comment,
+                                        it_likecount = korean_CommentList[i].likecount
+                                )
+                        )
+                    }
                 }
-                Log.v("korean","22222222222222")
+
+
+//                //영어
+//                for(i in 0 until english__Comment.size){
+//                    if(english__Comment[i].sort.equals("영어")){
+//                        english_List.add(
+//                                CommentItem(
+//                                        it_username=english__Comment[i].nickname,
+//                                        it_date=english__Comment[i].writetime.substring(0,10),
+//                                        it_comment=english__Comment[i].comment,
+//                                        it_likecount=english__Comment[i].likecount
+//                                )
+//                        )
+//                    }else{
+//                        //그외
+//                        ect_List.add(
+//                                CommentItem(
+//                                        it_username=english__Comment[i].nickname,
+//                                        it_date=english__Comment[i].writetime.substring(0,10),
+//                                        it_comment=english__Comment[i].comment,
+//                                        it_likecount=english__Comment[i].likecount
+//                                )
+//                        )
+//                    }
+//                }
+
+                //viewModel.englishlist.postValue(english_List)
+
+                //viewModel.englishlist.value= english_List[1] // viewmodel에 korean댓글 수 넣음.
+                //Log.v("koreansize 서버"+korean_CommentList.size,"--------------")
+
                 //리사이클러뷰의 어댑터 세팅
                 FKrecyclerview.adapter=mpadapter1
                 //리사이클러뷰 배치
@@ -124,7 +174,6 @@ class fragment_korean(url:String) : Fragment(){
                 FKrecyclerview.layoutManager=lm
                 mpadapter1.data=commentList
                 mp_datalist.add(mpadapter1.data)
-                Log.v("korean","3333333333333")
 
             }
         }
@@ -139,7 +188,7 @@ class fragment_korean(url:String) : Fragment(){
             if(it.isSuccessful) {
                 progressOFF()
                 val korean_positive_CommentList = it.body()!!.korean_data
-                viewModel.positivesize.value = korean_positive_CommentList.size // viewmodel에 korean댓글 수 넣음.
+                //viewModel.positivesize.value = korean_positive_CommentList.size // viewmodel에 korean댓글 수 넣음.
                 for (i in 0 until korean_positive_CommentList.size) {
                     if (korean_positive_CommentList[i].predict.equals("긍정")) {
                         positive_commentList.add(
@@ -175,14 +224,13 @@ class fragment_korean(url:String) : Fragment(){
             if(it.isSuccessful) {
                 progressOFF()
                 val korean_positive_CommentList = it.body()!!.korean_data
-
-                var p_count =0
+                //var p_count =0
                 for (i in 0 until korean_positive_CommentList.size) {
                     if (korean_positive_CommentList[i].predict.equals("긍정")) {
-                       p_count++
+                       //p_count++
                     }
                 }
-                viewModel.positivesize.value = p_count // viewmodel에 긍정댓글 수 넣음.
+                //viewModel.positivesize.value = p_count // viewmodel에 긍정댓글 수 넣음.
             }
 
         }

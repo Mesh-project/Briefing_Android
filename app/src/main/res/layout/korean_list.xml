@@ -23,6 +23,8 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:textOff="악플 OFF"
+        android:textOn="악플 ON"
         android:textSize="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
