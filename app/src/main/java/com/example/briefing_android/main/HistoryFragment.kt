@@ -87,12 +87,12 @@ class HistoryFragment : Fragment() {
                         // summary액티비티로 이동
                         val intent = Intent(getActivity(), SummaryActivity::class.java)
                         //intent.putExtra("history_url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
-                        intent.putExtra("analysis_idx",hitoryList[position].ht_id) // history 서버에서 히스토리 id값받아서 전달
+                        intent.putExtra("analysis_idx", hitoryList[position].ht_id) // history 서버에서 히스토리 id값받아서 전달
                         startActivity(intent)
                     }
                 })
 
+            }
+        }
     }
-
-
 }

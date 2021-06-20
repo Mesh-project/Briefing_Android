@@ -22,6 +22,7 @@ import com.example.briefing_android.api.URLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.sign.MySharedPreferences
 import com.example.briefing_android.sign.SignUpIdActivity
 import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
