@@ -37,8 +37,8 @@ data class analysis_info(
     val analysis_date : String,
     @SerializedName("title")
     val title: String,
-    @SerializedName("thumnail")
-    val thumnail : String,
+    @SerializedName("thumbnail")
+    val thumbnail : String,
     @SerializedName("channel_name")
     val channel_name: String,
     @SerializedName("video_time")

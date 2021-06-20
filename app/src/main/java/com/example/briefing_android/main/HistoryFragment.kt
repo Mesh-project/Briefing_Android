@@ -34,7 +34,7 @@ class HistoryFragment : Fragment() {
         //var thiscontext = container!!.getContext()
         rv = view.findViewById(R.id.history_recyclerView)
 
-        //user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
+        user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
         Log.v("histroyfragment 확인","user_idx"+user_idx)
 
         server(mContext)
@@ -82,16 +82,18 @@ class HistoryFragment : Fragment() {
                 rv_adapter.notifyDataSetChanged()
                 myhistorylist.add(rv_adapter.data)
 
+                rv_adapter.setItemClickListener(object : ht_Adapter.ItemClickListener {
+                    override fun onClick(view: View, position: Int) {
+                        // summary액티비티로 이동
+                        val intent = Intent(getActivity(), SummaryActivity::class.java)
+                        //intent.putExtra("history_url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
+                        intent.putExtra("analysis_idx",hitoryList[position].ht_id) // history 서버에서 히스토리 id값받아서 전달
+                        startActivity(intent)
+                    }
+                })
+
             }
         }
-        rv_adapter.setItemClickListener(object : ht_Adapter.ItemClickListener {
-            override fun onClick(view: View, position: Int) {
-                // summary액티비티로 이동
-                Log.v("summary액티비티로 이동", "성공")
-                val intent = Intent(getActivity(), SummaryActivity::class.java)
-                startActivity(intent)
-            }
-        })
 
     }
 

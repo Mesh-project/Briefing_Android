@@ -22,6 +22,7 @@ import com.example.briefing_android.api.URLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.sign.MySharedPreferences
 import com.example.briefing_android.sign.SignUpIdActivity
 import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.recyclerview_comment.Graph_Viewpager_adapter
@@ -33,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SummaryActivity : AppCompatActivity() {
     private lateinit var btn_back: ImageButton
-    lateinit var url: String
+    var url: String =""
     private lateinit var channelname :TextView
     private lateinit var thumbnail :ImageButton
     private lateinit var video_time :TextView
@@ -41,38 +42,38 @@ class SummaryActivity : AppCompatActivity() {
     private lateinit var title :TextView
     var user_idx: Int =1
     var anal_str : String=""
+    var analysis_idx:Int= 0 //히스토리에서 받아오는 id
     private lateinit var progressDialog: AppCompatDialog
-
-
-
+    private lateinit var btn_comment : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_summary)
-
-
-        url = intent.getStringExtra("url")
+        if (intent.getStringExtra("url")!=null){
+            url = intent.getStringExtra("url")
+        }
         anal_str = "https://www.youtube.com/watch?v=" + url
         Log.d("1.url value= ",url)
         Log.d("2.url value= ",anal_str)
 
-        var btn_comment : Button = findViewById(R.id.btn_comment)
+        user_idx = MySharedPreferences.getUserIdx(this).toInt()
+        Log.v("summaryactivity 확인","user_idx"+user_idx)
 
-        btn_comment.setOnClickListener(
-            View.OnClickListener {
-                val intent = Intent(this, CommentActivity::class.java)
-                intent.putExtra("url", url)
-                startActivity(intent)
-            }
-        )
+        analysis_idx = intent.getIntExtra("analysis_idx",0)
+        Log.v("summaryactivity 확인","analysis+idx"+user_idx.toString())
 
 
-
+        btn_comment = findViewById(R.id.btn_comment)
+//        btn_comment.setOnClickListener(
+//                View.OnClickListener {
+//                    val intent = Intent(this, CommentActivity::class.java)
+//                    intent.putExtra("url", url)
+//                    startActivity(intent)
+//                }
+//        )
 
 //        var indicator1 : ImageView = findViewById(R.id.indicator1)
 //        var indicator2 : ImageView = findViewById(R.id.indicator2)
-
-
 
         channelname = findViewById(R.id.channelname)
         thumbnail= findViewById(R.id.btn_thumbnail)
@@ -80,9 +81,15 @@ class SummaryActivity : AppCompatActivity() {
         topic = findViewById(R.id.summary)
         title = findViewById(R.id.title)
 
-
         progressON()
-        server(context = this)
+
+        if(analysis_idx!=0){
+            history_server(context=this)
+
+        }
+        else{
+            server(context = this)
+        }
 
         //그래프 뷰페이저
 //        var viewpager = findViewById<ViewPager>(R.id.viewpager)
@@ -110,16 +117,12 @@ class SummaryActivity : AppCompatActivity() {
 //        })
 
 
-
-
-
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
         btn_back.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
 
         // 2. 유투브 영상으로 넘어가기
         thumbnail.setOnClickListener(View.OnClickListener {
@@ -150,11 +153,59 @@ class SummaryActivity : AppCompatActivity() {
                     title.setText(VideoInfo.title)
                 }
                 Glide.with(this)
-                    .load(VideoInfo.thumnail)
+                    .load(VideoInfo.thumbnail)
                     .override(1500,600)
                     .into(thumbnail)
                 video_time.setText(VideoInfo.video_time)
                 topic.setText(VideoInfo.topic)
+            }
+            btn_comment.setOnClickListener(
+                    View.OnClickListener {
+                        val intent = Intent(this, CommentActivity::class.java)
+                        intent.putExtra("url", url)
+                        startActivity(intent)
+                    }
+            )
+        }
+        //---------------------------------------
+    }
+
+    fun history_server(context: Context){
+        //-------------server-----------------
+        print("history detail 함수호출")
+        val analysispost = UserServiceImpl.HistroyDetailService.responseHistory(analysis_idx)
+
+        analysispost.safeEnqueue {
+            Log.v("history detail 서버","들어옴")
+            if(it.isSuccessful){
+                progressOFF()
+                Log.v("history detail 서버","성공")
+                val longtilte : String
+                val VideoInfo = it.body()!!.data
+                channelname.setText(VideoInfo.channel_name)
+                if(VideoInfo.title.length>45){
+                    longtilte = VideoInfo.title.substring(0,45) + "..."
+                    title.setText(longtilte)
+                }else{
+                    title.setText(VideoInfo.title)
+                }
+                Glide.with(this)
+                        .load(VideoInfo.thumbnail)
+                        .override(1500,600)
+                        .into(thumbnail)
+                video_time.setText(VideoInfo.video_time)
+                topic.setText(VideoInfo.topic)
+
+                url=VideoInfo.url
+                Log.v("history_Detail 확인",VideoInfo.url)
+                btn_comment.setOnClickListener(
+                        View.OnClickListener {
+                            val intent = Intent(this, CommentActivity::class.java)
+                            Log.v("history_Detail 확인2",VideoInfo.url.substring(32,VideoInfo.url.length))
+                            intent.putExtra("url", VideoInfo.url.substring(32,VideoInfo.url.length))
+                            startActivity(intent)
+                        }
+                )
             }
         }
         //---------------------------------------
