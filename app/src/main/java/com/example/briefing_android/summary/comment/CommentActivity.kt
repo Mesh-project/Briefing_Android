@@ -5,14 +5,17 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
+import com.example.briefing_android.main.MainActivity
 import com.example.briefing_android.sign.SignUpIdActivity
 import com.example.briefing_android.summary.Comment_Viewpager_adapter
+import com.example.briefing_android.summary.SummaryActivity
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
@@ -74,10 +77,14 @@ class CommentActivity : AppCompatActivity() {
                 val chart_count = it.body()!!.count
 
                 for(i in 0 until 3){
-                    yValues.add(PieEntry(chart_count[i].toFloat(), name_list[i]))
+                    if(chart_count[i]!=0){
+                        yValues.add(PieEntry(chart_count[i].toFloat(), name_list[i]))
+                    }
                 }
                 for(i in 3 until chart_count.size){
-                    chart2_yValues.add(PieEntry(chart_count[i].toFloat(), name_list[i]))
+                    if(chart_count[i]!=0){
+                        chart2_yValues.add(PieEntry(chart_count[i].toFloat(), name_list[i]))
+                    }
                 }
             }
 
@@ -147,6 +154,12 @@ class CommentActivity : AppCompatActivity() {
         comment_viewPager.adapter = commnt_fragmentAdapter
         comment_tablayout.setupWithViewPager(comment_viewPager)
 
+        var backbutton : ImageButton = findViewById(R.id.backbutton)
+        // 1. 뒤로가기 버튼 이벤트
+            backbutton.setOnClickListener {
+            val intent = Intent(this, SummaryActivity::class.java)
+                startActivity(intent)
+        }
     }
 }
 }

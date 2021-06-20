@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -65,16 +66,22 @@ class fragment_korean(url:String) : Fragment(){
                 if(flag==0){
                     progressON()
                     positive_server(thiscontext)
+                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
+                    t1.show()
                     flag=1
                 }
                 else{
                     mpadapter1.data=positive_commentList
                     mpadapter1.notifyDataSetChanged()
+                    var t1 = Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT)
+                    t1.show()
                 }
             }
             else{
                 mpadapter1.data=commentList
                 mpadapter1.notifyDataSetChanged()
+                var t1 = Toast.makeText(thiscontext, "전체 댓글 보기", Toast.LENGTH_SHORT)
+                t1.show()
             }
 
         })

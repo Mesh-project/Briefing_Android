@@ -6,13 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".summary.comment.CommentActivity">
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/backbutton"
+            android:src="@drawable/ic_back"
+            android:background="#00000000"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/logo"
+            android:text="댓글 분석"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorMain"
+            android:textSize="30dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.github.mikephil.charting.charts.PieChart
         android:layout_width="205dp"
         android:layout_height="230dp"
         android:id="@+id/piechart"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintLeft_toLeftOf="parent"
         android:padding="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintHorizontal_weight="1">
     </com.github.mikephil.charting.charts.PieChart>
 
@@ -21,9 +57,10 @@
         android:layout_height="230dp"
         app:layout_constraintLeft_toRightOf="@+id/piechart"
         android:id="@+id/piechart2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintRight_toRightOf="parent"
         android:padding="10dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintHorizontal_weight="1">
     </com.github.mikephil.charting.charts.PieChart>
 
