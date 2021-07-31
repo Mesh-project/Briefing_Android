@@ -30,7 +30,7 @@
         android:layout_marginTop="313dp"
         android:layout_marginRight="30dp"
         android:hint="url입력"
-        android:text="https://www.youtube.com/watch?v=vQJJ255QFGM"
+        android:text="https://www.youtube.com/watch?v=hlRQvUEshxw"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
