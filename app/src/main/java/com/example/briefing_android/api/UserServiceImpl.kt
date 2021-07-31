@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit
 
 
 object UserServiceImpl {
-    private const val BASE_URL = "http://52.79.55.149:8080"
+    private const val BASE_URL = "http://3.37.252.63:8080"
 
 
     var okHttpClient = OkHttpClient.Builder()
