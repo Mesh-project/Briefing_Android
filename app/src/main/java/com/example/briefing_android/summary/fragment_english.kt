@@ -45,8 +45,6 @@ class fragment_english(url:String) : Fragment(){
         progressON()
         server(thiscontext)
 
-
-
         return english_listview
 
     }

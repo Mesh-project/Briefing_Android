@@ -50,8 +50,8 @@ class fragment_korean(url: String) : Fragment() {
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
 
         progressON()
-        //server(thiscontext)
-        //positive_server_count(thiscontext)
+        server(thiscontext)
+        positive_server_count(thiscontext)
 
         var radioGroup : RadioGroup = korean_listview.findViewById(R.id.radioGroup)
         radioGroup.setOnCheckedChangeListener { group, checkedId ->

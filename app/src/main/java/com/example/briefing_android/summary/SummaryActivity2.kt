@@ -20,6 +20,7 @@ import com.example.briefing_android.main.MainActivity
 import com.example.briefing_android.main.articleActivity
 import com.example.briefing_android.sign.MySharedPreferences
 import com.example.briefing_android.summary.comment.CommentActivity
+import com.example.briefing_android.summary.comment.CommentListActivity
 
 class SummaryActivity2: AppCompatActivity() {
     private lateinit var btn_back: ImageButton
@@ -33,7 +34,6 @@ class SummaryActivity2: AppCompatActivity() {
     private lateinit var tv_time :TextView
     private lateinit var tv_summary :TextView
     private lateinit var btn_comment : Button
-
 
     var url: String =""
 
@@ -75,7 +75,6 @@ class SummaryActivity2: AppCompatActivity() {
         tv_channelname  = findViewById(R.id.tv_channelname)
         tv_summary = findViewById(R.id.tv_summary)
         tv_time=findViewById(R.id.tv_time)
-        btn_comment = findViewById(R.id.btn_comment)
 
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
@@ -104,6 +103,16 @@ class SummaryActivity2: AppCompatActivity() {
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse(Videourl))
             startActivity(intent)
         })
+
+        btn_comment = findViewById(R.id.btn_comment)
+        // 5. 댓글 보기버튼 이벤트
+        btn_comment.setOnClickListener(
+            View.OnClickListener {
+                val intent = Intent(this, CommentListActivity::class.java)
+                intent.putExtra("url", url)
+                startActivity(intent)
+            }
+        )
     }
 
     fun server(context: Context){
@@ -135,7 +144,7 @@ class SummaryActivity2: AppCompatActivity() {
             }
             btn_comment.setOnClickListener(
                     View.OnClickListener {
-                        val intent = Intent(this, CommentActivity::class.java)
+                        val intent = Intent(this, CommentListActivity::class.java)
                         intent.putExtra("url", url)
                         startActivity(intent)
                     }
@@ -174,7 +183,7 @@ class SummaryActivity2: AppCompatActivity() {
                 Log.v("history_Detail 확인",VideoInfo.url)
                 btn_comment.setOnClickListener(
                         View.OnClickListener {
-                            val intent = Intent(this, CommentActivity::class.java)
+                            val intent = Intent(this, CommentListActivity::class.java)
                             Log.v("history_Detail 확인2",VideoInfo.url.substring(32,VideoInfo.url.length))
                             intent.putExtra("url", VideoInfo.url.substring(32,VideoInfo.url.length))
                             startActivity(intent)
