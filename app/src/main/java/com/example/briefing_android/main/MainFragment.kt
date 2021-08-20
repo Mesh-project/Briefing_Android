@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
 import com.example.briefing_android.sign.SignInIdActivity
 import com.example.briefing_android.summary.SummaryActivity
+import com.example.briefing_android.summary.SummaryActivity2
 
 class MainFragment : Fragment() {
     private lateinit var edit_url: EditText
@@ -79,7 +80,7 @@ class MainFragment : Fragment() {
             // summary액티비티로 이동
             url =  edit_url.getText().toString()
             urlcode = url.substring(32,url.length)
-            val intent = Intent(getActivity(), SummaryActivity::class.java)
+            val intent = Intent(getActivity(), SummaryActivity2::class.java)
             intent.putExtra("url",urlcode)
             startActivity(intent)
         }
