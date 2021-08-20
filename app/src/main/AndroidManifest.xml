@@ -16,14 +16,15 @@
         <activity android:name=".main.HistoryActivity" />
         <activity android:name=".summary.body_text"/>
         <activity android:name=".main.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".summary.SummaryActivity" />
         <activity android:name=".summary.SummaryActivity2">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
         <activity android:name=".sign.SignInIdActivity">
 
@@ -32,6 +33,7 @@
         <activity android:name=".sign.SignUpPwActivity" />
         <activity android:name=".sign.SignUpIdActivity" />
         <activity android:name=".sign.SignUpSuccessActivity" />
+        <activity android:name=".main.articleActivity"/>
     </application>
 
 </manifest>

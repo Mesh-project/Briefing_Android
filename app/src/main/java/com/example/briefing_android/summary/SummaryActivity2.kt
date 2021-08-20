@@ -7,10 +7,12 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.briefing_android.R
 import com.example.briefing_android.main.MainActivity
+import com.example.briefing_android.main.articleActivity
 
 class SummaryActivity2: AppCompatActivity() {
     private lateinit var btn_back: ImageButton
     private lateinit var btn_content: Button
+    private lateinit var btn_article: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +29,13 @@ class SummaryActivity2: AppCompatActivity() {
         //2. 본문 보기 버튼
         btn_content.setOnClickListener {
             var intent = Intent(this, body_text::class.java)
+            startActivity(intent)
+        }
+
+        btn_article=findViewById(R.id.btn_article)
+        //3. 관련 기사 보기 버튼
+        btn_article.setOnClickListener {
+            var intent = Intent(this, articleActivity::class.java)
             startActivity(intent)
         }
     }

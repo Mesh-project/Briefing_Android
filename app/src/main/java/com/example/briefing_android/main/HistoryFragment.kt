@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -37,7 +38,56 @@ class HistoryFragment : Fragment() {
         user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
         Log.v("histroyfragment 확인","user_idx"+user_idx)
 
-        server(mContext)
+        /*test
+        rv.adapter = rv_adapter
+        // 리사이클러뷰 배치
+        //rv.layoutManager = GridLayoutManager(context, 1)
+        //rv.layoutManager = LinearLayoutManager(context)
+        rv.layoutManager = GridLayoutManager(context,2)
+
+        var hitoryList = arrayListOf<ListItem>()
+        hitoryList.add(
+                        ListItem(
+                                // ht_image = "dfaef",
+                                ht_title = "유튜브 제목1",
+                                ht_analysis_date = "2021. 04. 09" ,
+                                ht_id = 1,
+                                ht_url = "qqq",
+                                ht_thumbnail = "ss",
+                                ht_channel_name = "Ss"
+                        )
+        )
+        hitoryList.add(
+                ListItem(
+                        // ht_image = "dfaef",
+                        ht_title = "유튜브 제목1",
+                        ht_analysis_date = "2021. 04. 09" ,
+                        ht_id = 2,
+                        ht_url = "qqq",
+                        ht_thumbnail ="Z",
+                        ht_channel_name = "Ss"
+                )
+        )
+        hitoryList.add(
+                ListItem(
+                        // ht_image = "dfaef",
+                        ht_title = "유튜브 제목1",
+                        ht_analysis_date = "2021. 04. 09" ,
+                        ht_id = 3,
+                        ht_url = "qqq",
+                        ht_thumbnail = "ss",
+                        ht_channel_name = "Ss"
+                )
+        )
+
+        rv.layoutManager = GridLayoutManager(context,2)
+        //rv_adapter.data = repository.getRepoList() // 데이터줌
+        rv_adapter.data = hitoryList
+        rv_adapter.notifyDataSetChanged()
+        myhistorylist.add(rv_adapter.data)
+        */
+
+        //server(mContext)
 
         return view
         //return inflater.inflate(R.layout.fragment_slide_page_main, container, false)
@@ -76,7 +126,8 @@ class HistoryFragment : Fragment() {
                 rv.adapter = rv_adapter
                 // 리사이클러뷰 배치
                 //rv.layoutManager = GridLayoutManager(context, 1)
-                rv.layoutManager = LinearLayoutManager(context)
+                //rv.layoutManager = LinearLayoutManager(context)
+                rv.layoutManager = GridLayoutManager(context,2)
                 //rv_adapter.data = repository.getRepoList() // 데이터줌
                 rv_adapter.data = hitoryList
                 rv_adapter.notifyDataSetChanged()
