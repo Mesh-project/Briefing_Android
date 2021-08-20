@@ -3,10 +3,10 @@
     <!-- Background -->
 
     <solid
-        android:color="#FFFFFF"/>
+        android:color="@color/white"/>
     <stroke
         android:width="2dp"
-        android:color="#0066FF"
+        android:color="@color/colorMain"
        />
     <size
         android:width="200dp"

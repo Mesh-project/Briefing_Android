@@ -97,7 +97,6 @@ class SignUpIdActivity : AppCompatActivity() {
             // 3-2. 성공 시 회원가입 - 비밀번호 입력 창으로 넘어감
             val intent = Intent(this, SignUpPwActivity::class.java)
             intent.putExtra("email2",email2)
-
             startActivity(intent)
         }
 
