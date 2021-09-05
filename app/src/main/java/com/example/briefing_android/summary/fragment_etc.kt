@@ -69,7 +69,9 @@ class fragment_etc(url:String) : Fragment(){
                                         it_username=ect_Comment[i].nickname,
                                         it_date=ect_Comment[i].writetime.substring(0,10),
                                         it_comment=ect_Comment[i].comment,
-                                        it_likecount=ect_Comment[i].likecount
+                                        it_likecount=ect_Comment[i].likecount,
+                                        it_emotion = "",
+                                        it_emotionp = ""
                                 )
                         )
                         cnt++

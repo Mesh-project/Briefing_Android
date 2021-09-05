@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="20dp"
     tools:context=".summary.comment.CommentGraphActivity"
     android:background="@color/gray3">
 
@@ -53,6 +54,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:elevation="20dp"
         app:layout_constraintHorizontal_weight="1"
         android:background="@color/white">
     </com.github.mikephil.charting.charts.PieChart>
@@ -67,6 +69,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:elevation="20dp"
         app:layout_constraintHorizontal_weight="1"
         android:background="@color/white">
     </com.github.mikephil.charting.charts.PieChart>
@@ -81,6 +84,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:elevation="20dp"
         app:layout_constraintHorizontal_weight="1"
         android:background="@color/white">
 

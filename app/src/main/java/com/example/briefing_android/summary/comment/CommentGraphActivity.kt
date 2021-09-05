@@ -54,8 +54,8 @@ class CommentGraphActivity : AppCompatActivity() {
         piechart2.setTransparentCircleRadius(61f)
 
         // server
-        //var url = intent.getStringExtra("url")
-        var url = "https://www.youtube.com/watch?v=vQJJ255QFGM"
+        var url = intent.getStringExtra("url")
+        //var url = "https://www.youtube.com/watch?v=vQJJ255QFGM"
         val callcommentpost =
             UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(url))
         callcommentpost.safeEnqueue {
@@ -79,8 +79,8 @@ class CommentGraphActivity : AppCompatActivity() {
 
             val description = Description()
             description.setText("Language") //라벨
-            description.setPosition(450f, 40f)
-            description.setTextSize(15f)
+            description.setPosition(200f, 100f)
+            description.setTextSize(20f)
             piechart.setDescription(description)
             piechart.animateY(1000, Easing.EaseInOutCubic) //애니메이션
 

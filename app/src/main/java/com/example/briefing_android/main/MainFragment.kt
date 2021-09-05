@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 //import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,7 @@ class MainFragment : Fragment() {
             // summary액티비티로 이동
             url =  edit_url.getText().toString()
             urlcode = url.substring(32,url.length)
+            Log.v("summary url",urlcode)
             val intent = Intent(getActivity(), SummaryActivity2::class.java)
             intent.putExtra("url",urlcode)
             startActivity(intent)
