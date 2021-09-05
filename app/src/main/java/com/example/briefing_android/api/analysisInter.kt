@@ -13,10 +13,11 @@ interface analysisInter{
 }
 
 data class URLRequest(
-   @SerializedName("url")
-   val url : String,
    @SerializedName("user_idx")
-   val user_idx : Int
+   val user_idx : Int,
+   @SerializedName("url")
+   val url : String
+
 )
 
 data class URLResponse(
@@ -44,5 +45,11 @@ data class analysis_info(
     @SerializedName("video_time")
     val video_time : String,
     @SerializedName("topic")
-    val topic : String
+    val topic : String,
+    @SerializedName("script")
+    val script : String,
+    @SerializedName("wordcloud")
+    val wordcloud : String,
+    @SerializedName("topword")
+    val topword : List<String>
 )
