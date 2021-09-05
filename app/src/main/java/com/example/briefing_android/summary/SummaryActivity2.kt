@@ -30,8 +30,11 @@ class SummaryActivity2: AppCompatActivity() {
 
     private lateinit var tv_title :TextView
     private lateinit var img_thumbnail : ImageView
+    private lateinit var img_wordcloud : ImageView
+
     private lateinit var tv_channelname :TextView
     private lateinit var tv_time :TextView
+
     private lateinit var tv_summary :TextView
     private lateinit var btn_comment : Button
 
@@ -40,6 +43,9 @@ class SummaryActivity2: AppCompatActivity() {
     var user_idx: Int =1
     var anal_str : String=""
     var analysis_idx:Int= 0 //히스토리에서 받아오는 id
+
+    var script : String=""
+    var topkey = List<String>(3,{""})
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,26 +61,30 @@ class SummaryActivity2: AppCompatActivity() {
         Log.d("2.url value= ",anal_str)
 
         user_idx = MySharedPreferences.getUserIdx(this).toInt()
-        Log.v("summaryactivity 확인","user_idx"+user_idx)
+        Log.v("summaryactivity 확인","user_idx="+user_idx)
 
         analysis_idx = intent.getIntExtra("analysis_idx",0)
-        Log.v("summaryactivity 확인","analysis+idx"+user_idx.toString())
+        Log.v("summaryactivity 확인","analysis+idx="+user_idx.toString())
 
-
-
-        if(analysis_idx!=0){
-            history_server(context=this)
-
-        }
-        else{
-            server(context = this)
-        }
 
         tv_title = findViewById(R.id.tv_title)
         img_thumbnail= findViewById(R.id.img_thumbnail)
         tv_channelname  = findViewById(R.id.tv_channelname)
         tv_summary = findViewById(R.id.tv_summary)
         tv_time=findViewById(R.id.tv_time)
+        img_wordcloud=findViewById(R.id.img_wordcloud)
+
+        // 6. 서버 불러오기
+//        if(analysis_idx!=0){
+//            history_server(context=this)
+//        }
+//        else{
+//            server(context = this)
+//        }
+
+        Log.v("분석 서버","호출")
+        Log.v("useridx 확인",user_idx.toString())
+        server(this)
 
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
@@ -85,7 +95,13 @@ class SummaryActivity2: AppCompatActivity() {
         btn_content=findViewById(R.id.btn_content)
         //2. 본문 보기 버튼
         btn_content.setOnClickListener {
+
+            Log.v("script값 확인",script)
+
             var intent = Intent(this, body_text::class.java)
+            intent.putExtra("script", script)
+            intent.putExtra("tv_title", tv_title.text.toString())
+            intent.putExtra("tv_channelname", tv_channelname.text.toString())
             startActivity(intent)
         }
 
@@ -93,6 +109,10 @@ class SummaryActivity2: AppCompatActivity() {
         //3. 관련 기사 보기 버튼
         btn_article.setOnClickListener {
             var intent = Intent(this, articleActivity::class.java)
+            Log.v("topkey 확인",topkey.get(0))
+            intent.putExtra("top1", topkey.get(0))
+            intent.putExtra("top2", topkey.get(1))
+            intent.putExtra("top3", topkey.get(2))
             startActivity(intent)
         }
 
@@ -113,13 +133,15 @@ class SummaryActivity2: AppCompatActivity() {
                 startActivity(intent)
             }
         )
+
+
     }
 
     fun server(context: Context){
         //-------------server-----------------
         print("함수호출")
-        Log.v("anal_str value= ",anal_str)
-        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(anal_str,user_idx))
+        Log.v("anal_str url= ",anal_str)
+        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(user_idx,anal_str))
 
         analysispost.safeEnqueue {
             Log.v("분석 서버","들어옴")
@@ -129,8 +151,8 @@ class SummaryActivity2: AppCompatActivity() {
                 val longtilte : String
                 val VideoInfo = it.body()!!.data
                 tv_channelname.setText(VideoInfo.channel_name)
-                if(VideoInfo.title.length>45){
-                    longtilte = VideoInfo.title.substring(0,45) + "..."
+                if(VideoInfo.title.length>50){
+                    longtilte = VideoInfo.title.substring(0,50) + "..."
                     tv_title.setText(longtilte)
                 }else{
                     tv_title.setText(VideoInfo.title)
@@ -139,16 +161,17 @@ class SummaryActivity2: AppCompatActivity() {
                         .load(VideoInfo.thumbnail)
                         .override(1000,450)
                         .into(img_thumbnail)
+
+                Glide.with(this)
+                        .load(VideoInfo.wordcloud)
+                        .override(1200,800)
+                        .into(img_wordcloud)
                 tv_time.setText(VideoInfo.video_time)
                 tv_summary.setText(VideoInfo.topic)
+                script=VideoInfo.script
+                topkey=VideoInfo.topword
             }
-            btn_comment.setOnClickListener(
-                    View.OnClickListener {
-                        val intent = Intent(this, CommentListActivity::class.java)
-                        intent.putExtra("url", url)
-                        startActivity(intent)
-                    }
-            )
+
         }
         //---------------------------------------
     }

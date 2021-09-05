@@ -15,14 +15,16 @@ class articleActivity:AppCompatActivity() {
 
         val myWebView: WebView = findViewById(R.id.article_webview)
 
-        val keyword1: String = "코로나"
-        val keyword2: String = "확진자"
-        val keyword3: String = "격상"
+        val keyword1: String = intent.getStringExtra("top1")
+        val keyword2: String = intent.getStringExtra("top2")
+        val keyword3: String = intent.getStringExtra("top3")
 
         val url1: String = "https://search.naver.com/search.naver?query="
         val url2: String = "&where=news&ie=utf8&sm=nws_hty"
         myWebView.loadUrl(url1 + keyword1 + "+" + keyword2 + "+" + keyword3 + url2)
         Log.d("기사 주소", url1 + keyword1 + "+" + keyword2 + "+" + keyword3 + url2)
+
+
 
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트

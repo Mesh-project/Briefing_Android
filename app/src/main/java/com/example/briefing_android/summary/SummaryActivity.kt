@@ -57,10 +57,10 @@ class SummaryActivity : AppCompatActivity() {
         Log.d("2.url value= ",anal_str)
 
         user_idx = MySharedPreferences.getUserIdx(this).toInt()
-        Log.v("summaryactivity 확인","user_idx"+user_idx)
+        Log.v("summaryactivity 확인","user_idx="+user_idx)
 
         analysis_idx = intent.getIntExtra("analysis_idx",0)
-        Log.v("summaryactivity 확인","analysis+idx"+user_idx.toString())
+        Log.v("summaryactivity 확인","analysis+idx="+user_idx.toString())
 
 
         btn_comment = findViewById(R.id.btn_comment)
@@ -86,12 +86,11 @@ class SummaryActivity : AppCompatActivity() {
 
         progressON()
 
-        if(analysis_idx!=0){
-            history_server(context=this)
-
+        if(analysis_idx==1){
+            server(context = this)
         }
         else{
-            server(context = this)
+            history_server(context=this)
         }
 
         //그래프 뷰페이저
@@ -143,7 +142,7 @@ class SummaryActivity : AppCompatActivity() {
     //-------------server-----------------
         print("함수호출")
         Log.v("anal_str value= ",anal_str)
-        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(anal_str,user_idx))
+        val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(user_idx,anal_str))
 
         analysispost.safeEnqueue {
             Log.v("분석 서버","들어옴")
