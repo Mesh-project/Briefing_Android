@@ -2,6 +2,9 @@ package com.example.briefing_android.summary
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDialog
 import com.bumptech.glide.Glide
 import com.example.briefing_android.R
 import com.example.briefing_android.api.URLRequest
@@ -37,6 +41,9 @@ class SummaryActivity2: AppCompatActivity() {
 
     private lateinit var tv_summary :TextView
     private lateinit var btn_comment : Button
+
+    private lateinit var progressDialog: AppCompatDialog
+
 
     var url: String =""
 
@@ -74,17 +81,17 @@ class SummaryActivity2: AppCompatActivity() {
         tv_time=findViewById(R.id.tv_time)
         img_wordcloud=findViewById(R.id.img_wordcloud)
 
-        // 6. 서버 불러오기
-//        if(analysis_idx!=0){
-//            history_server(context=this)
-//        }
-//        else{
-//            server(context = this)
-//        }
+        //6. 서버 불러오기
+        progressON()
 
-        Log.v("분석 서버","호출")
-        Log.v("useridx 확인",user_idx.toString())
-        server(this)
+        if(analysis_idx!=0){
+            history_server(context=this)
+        }
+        else{
+            Log.v("분석 서버","호출")
+            Log.v("useridx 확인",user_idx.toString())
+            server(context = this)
+        }
 
         btn_back = findViewById(R.id.btn_back)
         // 1. 뒤로가기 버튼 이벤트
@@ -146,7 +153,7 @@ class SummaryActivity2: AppCompatActivity() {
         analysispost.safeEnqueue {
             Log.v("분석 서버","들어옴")
             if(it.isSuccessful){
-                //progressOFF()
+                progressOFF()
                 Log.v("분석 서버","성공")
                 val longtilte : String
                 val VideoInfo = it.body()!!.data
@@ -184,7 +191,7 @@ class SummaryActivity2: AppCompatActivity() {
         analysispost.safeEnqueue {
             Log.v("history detail 서버","들어옴")
             if(it.isSuccessful){
-                //progressOFF()
+                progressOFF()
                 Log.v("history detail 서버","성공")
                 val longtilte : String
                 val VideoInfo = it.body()!!.data
@@ -215,5 +222,27 @@ class SummaryActivity2: AppCompatActivity() {
             }
         }
         //---------------------------------------
+    }
+
+
+    fun progressON(){
+        progressDialog = AppCompatDialog(this)
+        progressDialog.setCancelable(true)
+        progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.setContentView(R.layout.dialog_layout)
+        progressDialog.show()
+        var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.iv_frame_loading)
+        var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
+        img_loading_framge?.post(object : Runnable{
+            override fun run() {
+                frameAnimation.start()
+            }
+
+        })
+    }
+    fun progressOFF(){
+        if(progressDialog != null && progressDialog.isShowing()){
+            progressDialog.dismiss()
+        }
     }
 }
