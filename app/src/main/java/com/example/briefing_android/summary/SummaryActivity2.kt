@@ -67,7 +67,7 @@ class SummaryActivity2: AppCompatActivity() {
         Log.d("1.url value= ",url)
         Log.d("2.url value= ",anal_str)
 
-        user_idx = MySharedPreferences.getUserIdx(this).toInt()
+        //user_idx = MySharedPreferences.getUserIdx(this).toInt()
         Log.v("summaryactivity 확인","user_idx="+user_idx)
 
         analysis_idx = intent.getIntExtra("analysis_idx",0)

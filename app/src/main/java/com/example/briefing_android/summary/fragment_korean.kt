@@ -88,6 +88,26 @@ class fragment_korean(url: String) : Fragment() {
                         it_emotionp = "12.34%"
                 )
         )
+        commentList.add(
+            CommentItem(
+                it_username = "김아무개",
+                it_date = "2021.08.20",
+                it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
+                it_likecount = 123,
+                it_emotion = "부정",
+                it_emotionp = "12.34%"
+            )
+        )
+        commentList.add(
+            CommentItem(
+                it_username = "어쩌구",
+                it_date = "2021.08.20",
+                it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
+                it_likecount = 123,
+                it_emotion = "긍정",
+                it_emotionp = "12.34%"
+            )
+        )
         positive_commentList.add(
                 CommentItem(
                         it_username = "닉네임",

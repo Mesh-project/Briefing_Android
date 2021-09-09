@@ -20,6 +20,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginLeft="15dp"
+            android:textColor="@color/white"
             android:background="@drawable/ic_profile"
             android:gravity="center"
             android:scaleType="fitCenter"

@@ -6,6 +6,7 @@ import android.media.Image
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.briefing_android.R
@@ -28,8 +29,9 @@ class rv_ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         date.text=data.it_date
         emotionIcon(data.it_emotion) // 긍정부정 이모지
         percent.text=data.it_emotionp
-        randomColor(data.it_username.toString().substring(0,1)) // 프로필 이미지주기
-
+        profile.setText(data.it_username.toString().substring(0,1))
+        //randomColor(data.it_username.toString().substring(0,1)) // 프로필 이미지주기
+        //randomprofile(data.it_username.toString().substring(0,1))
     }
 
     fun emotionIcon(emotion:String){
@@ -45,10 +47,14 @@ class rv_ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun randombackground(s:String){
-        var i = (Math.random()*3).toInt()
-
-
+    fun randomprofile(s:String){
+        var x = (Math.random()*3).toInt()
+        when (x){
+            1-> profile.setBackgroundColor(Color.parseColor("#0066FF"))
+            2-> profile.setBackgroundColor(Color.parseColor("#3F8CFF"))
+            3-> profile.setBackgroundColor(Color.parseColor("#7FB2FF"))
+        }
+        profile.setText(s)
     }
 
     fun randomColor(s:String){
