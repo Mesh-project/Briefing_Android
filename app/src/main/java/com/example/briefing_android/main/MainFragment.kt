@@ -16,7 +16,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.briefing_android.R
 import com.example.briefing_android.sign.SignInIdActivity
-import com.example.briefing_android.summary.SummaryActivity
 import com.example.briefing_android.summary.SummaryActivity2
 
 class MainFragment : Fragment() {

@@ -17,7 +17,7 @@ class rv_ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val date: TextView = view.findViewById(R.id.date)
     val comment : TextView = view.findViewById(R.id.user_comment)
     val likecount : TextView = view.findViewById(R.id.like_count)
-    val icon : ImageView = view.findViewById(R.id.emotion_icon)
+    val icon : ImageView = view.findViewById(R.id.em_icon)
     val percent : TextView = view.findViewById(R.id.emotion_p)
     val profile : TextView = view.findViewById(R.id.profile)
 
@@ -30,8 +30,6 @@ class rv_ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         emotionIcon(data.it_emotion) // 긍정부정 이모지
         percent.text=data.it_emotionp
         profile.setText(data.it_username.toString().substring(0,1))
-        //randomColor(data.it_username.toString().substring(0,1)) // 프로필 이미지주기
-        //randomprofile(data.it_username.toString().substring(0,1))
     }
 
     fun emotionIcon(emotion:String){
@@ -47,22 +45,4 @@ class rv_ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
     }
 
-    fun randomprofile(s:String){
-        var x = (Math.random()*3).toInt()
-        when (x){
-            1-> profile.setBackgroundColor(Color.parseColor("#0066FF"))
-            2-> profile.setBackgroundColor(Color.parseColor("#3F8CFF"))
-            3-> profile.setBackgroundColor(Color.parseColor("#7FB2FF"))
-        }
-        profile.setText(s)
-    }
-
-    fun randomColor(s:String){
-        var r = (Math.random()*255).toInt()
-        var g = (Math.random()*255).toInt()
-        var b = (Math.random()*255).toInt()
-        profile.setBackgroundColor(Color.rgb(r,g,b))
-        profile.setText(s)
-        profile.setTextColor(Color.rgb(r+125,g+50,b+100))
-    }
 }

@@ -55,7 +55,6 @@ class CommentGraphActivity : AppCompatActivity() {
 
         // server
         var url = intent.getStringExtra("url")
-        //var url = "https://www.youtube.com/watch?v=vQJJ255QFGM"
         val callcommentpost =
             UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(url))
         callcommentpost.safeEnqueue {

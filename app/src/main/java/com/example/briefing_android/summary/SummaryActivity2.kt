@@ -20,10 +20,7 @@ import com.example.briefing_android.R
 import com.example.briefing_android.api.URLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
-import com.example.briefing_android.main.MainActivity
 import com.example.briefing_android.main.articleActivity
-import com.example.briefing_android.sign.MySharedPreferences
-import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.comment.CommentListActivity
 
 class SummaryActivity2: AppCompatActivity() {

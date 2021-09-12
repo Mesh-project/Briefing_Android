@@ -17,7 +17,7 @@ import com.example.briefing_android.api.SharedPreferenceController
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.sign.MySharedPreferences
-import com.example.briefing_android.summary.SummaryActivity
+import com.example.briefing_android.summary.SummaryActivity2
 
 class HistoryFragment : Fragment() {
     private var token: String = ""
@@ -136,7 +136,7 @@ class HistoryFragment : Fragment() {
                 rv_adapter.setItemClickListener(object : ht_Adapter.ItemClickListener {
                     override fun onClick(view: View, position: Int) {
                         // summary액티비티로 이동
-                        val intent = Intent(getActivity(), SummaryActivity::class.java)
+                        val intent = Intent(getActivity(), SummaryActivity2::class.java)
                         //intent.putExtra("history_url",hitoryList[position].ht_url.substring(32,hitoryList[position].ht_url.length)) // histroy서버에서 url받아서 전달
                         intent.putExtra("analysis_idx", hitoryList[position].ht_id) // history 서버에서 히스토리 id값받아서 전달
                         startActivity(intent)

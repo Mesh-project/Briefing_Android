@@ -1,6 +1,5 @@
-package com.example.briefing_android.summary
+package com.example.briefing_android.summary.comment
 
-import android.app.LauncherActivity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -25,10 +23,9 @@ import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 class fragment_etc(url:String) : Fragment(){
     private lateinit var  FErecyclerview : RecyclerView
-    private var mpadapter3: rv_Adapter = rv_Adapter(R.layout.comment_item)
+    private var mpadapter3: rv_Adapter = rv_Adapter(R.layout.comment_item2)
     private lateinit var progressDialog: AppCompatDialog
     private var mp_datalist = ArrayList<ArrayList<CommentItem>>()
-    private lateinit var viewModel: SharedPiechartModel
 
     var url = url
 
@@ -37,13 +34,9 @@ class fragment_etc(url:String) : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         var etc_listview = inflater.inflate(R.layout.etc_list, container, false)
         var thiscontext = container!!.getContext()
         FErecyclerview = etc_listview.findViewById(R.id.etc_recyclerview)
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedPiechartModel::class.java)
-
 
         progressON()
         server(thiscontext)
@@ -61,7 +54,6 @@ class fragment_etc(url:String) : Fragment(){
                 var ect_List = arrayListOf<CommentItem>()
                 val ect_Comment = it.body()!!.etc_data
 
-                var cnt =0
                 for(i in 0 until ect_Comment.size){
                     if(ect_Comment[i].sort.equals("그외")){
                         ect_List.add(
@@ -74,10 +66,8 @@ class fragment_etc(url:String) : Fragment(){
                                         it_emotionp = ""
                                 )
                         )
-                        cnt++
                     }
                 }
-                //viewModel.etcsize.value = cnt// viewmodel에 댓글 수 넣음.
                 //리사이클러뷰의 어댑터 세팅
                 FErecyclerview.adapter=mpadapter3
 

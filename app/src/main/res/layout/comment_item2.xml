@@ -97,9 +97,10 @@
             app:layout_constraintLeft_toRightOf="@id/like_icon" />
 
         <ImageView
-            android:id="@+id/emotion_icon"
+            android:id="@+id/em_icon"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@id/user_comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/like_count"
@@ -115,9 +116,9 @@
             android:text=""
             android:layout_marginLeft="5dp"
             android:textColor="@color/gray1"
-            app:layout_constraintTop_toTopOf="@id/emotion_icon"
-            app:layout_constraintBottom_toBottomOf="@id/emotion_icon"
-            app:layout_constraintLeft_toRightOf="@id/emotion_icon" />
+            app:layout_constraintTop_toTopOf="@id/em_icon"
+            app:layout_constraintBottom_toBottomOf="@id/em_icon"
+            app:layout_constraintLeft_toRightOf="@id/em_icon" />
 
         <View
             android:layout_width="match_parent"

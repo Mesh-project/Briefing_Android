@@ -1,4 +1,4 @@
-package com.example.briefing_android.summary
+package com.example.briefing_android.summary.comment
 
 import android.content.Context
 import android.graphics.Color
@@ -12,8 +12,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -25,11 +23,10 @@ import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 class fragment_english(url: String) : Fragment() {
     private lateinit var FENrecyclerview: RecyclerView
-    private var mpadapter2: rv_Adapter = rv_Adapter(R.layout.comment_item)
-    var videourl = url
+    private var mpadapter2: rv_Adapter = rv_Adapter(R.layout.comment_item2)
     private lateinit var progressDialog: AppCompatDialog
     var mp_datalist = ArrayList<ArrayList<CommentItem>>()
-    private lateinit var viewModel: SharedPiechartModel
+    var url = url
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -40,19 +37,16 @@ class fragment_english(url: String) : Fragment() {
         var thiscontext = container!!.getContext()
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(SharedPiechartModel::class.java)
-
         progressON()
         server(thiscontext)
 
         return english_listview
-
     }
 
     private fun server(thiscontext: Context) {
         mpadapter2.notifyDataSetChanged()
 
-        val english_comment_List = UserServiceImpl.CommentService.requestURL(CommentURLRequest(videourl))
+        val english_comment_List = UserServiceImpl.CommentService.requestURL(CommentURLRequest(url))
         english_comment_List.safeEnqueue {
             if (it.isSuccessful) {
                 progressOFF()
@@ -60,7 +54,6 @@ class fragment_english(url: String) : Fragment() {
                 var english_List = arrayListOf<CommentItem>()
                 val english__Comment = it.body()!!.etc_data
 
-                var cnt = 0
                 for (i in 0 until english__Comment.size) {
                     if (english__Comment[i].sort.equals("영어")) {
                         english_List.add(
@@ -73,14 +66,11 @@ class fragment_english(url: String) : Fragment() {
                                         it_emotionp = ""
                                 )
                         )
-                        cnt++
                     }
                 }
-                viewModel.englishsize.value = cnt// viewmodel에 댓글 수 넣음.
-                viewModel.etcsize.value = english__Comment.size - cnt
+
                 //리사이클러뷰의 어댑터 세팅
                 FENrecyclerview.adapter = mpadapter2
-
                 //리사이클러뷰 배치
                 val lm = LinearLayoutManager(thiscontext)
                 FENrecyclerview.layoutManager = lm

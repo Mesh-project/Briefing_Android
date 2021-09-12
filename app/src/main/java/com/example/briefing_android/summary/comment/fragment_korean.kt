@@ -1,4 +1,4 @@
-package com.example.briefing_android.summary
+package com.example.briefing_android.summary.comment
 
 import android.content.Context
 import android.graphics.Color
@@ -12,15 +12,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
 import com.example.briefing_android.api.UserServiceImpl
 import com.example.briefing_android.api.safeEnqueue
-import com.example.briefing_android.summary.comment.CommentActivity
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
@@ -32,7 +29,6 @@ class fragment_korean(url: String) : Fragment() {
     var positive_commentList = arrayListOf<CommentItem>()
     private var url = url
     private lateinit var progressDialog: AppCompatDialog
-    private lateinit var viewModel: SharedPiechartModel
     lateinit var radioGroup : RadioGroup
 
     override fun onCreateView(
@@ -40,10 +36,7 @@ class fragment_korean(url: String) : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        viewModel =
-                ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                        SharedPiechartModel::class.java
-                )
+
 
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
         var thiscontext = container!!.getContext()
@@ -66,66 +59,6 @@ class fragment_korean(url: String) : Fragment() {
             Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT).show()
         }
 
-
-        // ------------- 더미데이터 ------------------
-        commentList.add(
-            CommentItem(
-                it_username = "닉네임",
-                it_date = "2021.08.20",
-                it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
-                it_likecount = 123,
-                    it_emotion = "부정",
-                    it_emotionp = "12.34%"
-            )
-        )
-        commentList.add(
-                CommentItem(
-                        it_username = "나혜지",
-                        it_date = "2021.08.20",
-                        it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
-                        it_likecount = 123,
-                        it_emotion = "긍정",
-                        it_emotionp = "12.34%"
-                )
-        )
-        commentList.add(
-            CommentItem(
-                it_username = "김아무개",
-                it_date = "2021.08.20",
-                it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
-                it_likecount = 123,
-                it_emotion = "부정",
-                it_emotionp = "12.34%"
-            )
-        )
-        commentList.add(
-            CommentItem(
-                it_username = "어쩌구",
-                it_date = "2021.08.20",
-                it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
-                it_likecount = 123,
-                it_emotion = "긍정",
-                it_emotionp = "12.34%"
-            )
-        )
-        positive_commentList.add(
-                CommentItem(
-                        it_username = "닉네임",
-                        it_date = "2021.08.20",
-                        it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
-                        it_likecount = 123,
-                        it_emotion = "긍정",
-                        it_emotionp = "12.34%"
-                )
-        )
-        FKrecyclerview.adapter = mpadapter1
-        //리사이클러뷰 배치
-        val lm = LinearLayoutManager(thiscontext)
-        FKrecyclerview.layoutManager = lm
-        mpadapter1.data = commentList
-        mp_datalist.add(mpadapter1.data)
-        // --------------------- 더미데이터 --------------------------
-
         return korean_listview
     }
 
@@ -133,7 +66,7 @@ class fragment_korean(url: String) : Fragment() {
         mpadapter1.notifyDataSetChanged()
 
         val callcommentpost =
-                UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest("GlJfoJYNIO8"))
+                UserServiceImpl.CommentService.requestURL(CommentURLRequest = CommentURLRequest(url))
         Log.v("korean comment url1", url)
 
         callcommentpost.safeEnqueue {
@@ -145,7 +78,6 @@ class fragment_korean(url: String) : Fragment() {
                 Log.v("intent", "크기 데이터 보냄")
 
                 for (i in 0 until korean_CommentList.size) {
-
                     var str = korean_CommentList[i].predict // 'xx.xx% 긍정' 식으로
                     var emotion = str.substring(str.length - 2, str.length) // 긍정부정만 잘라냄
                     var percent = str.substring(0, str.length - 3) // xx.xx%까지 잘라냄
