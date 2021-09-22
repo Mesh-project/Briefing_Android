@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".summary.comment.CommentListActivity"
@@ -57,10 +58,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/comment_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -73,8 +76,7 @@
             app:tabGravity="fill"
             app:tabIndicatorColor="#3f8cff"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="#3f8cff">
-        </com.google.android.material.tabs.TabLayout>
+            app:tabSelectedTextColor="#3f8cff"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/comment_viewPager"

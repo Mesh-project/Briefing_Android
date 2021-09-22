@@ -7,10 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
@@ -34,7 +30,9 @@ class CommentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comment_list)
 
 
-        var tab_text : List<String> = listOf("한국어","영어","그 외")
+        //var tab_text : List<String> = listOf("한국어","영어","그 외")
+        var tab_text : List<String> = listOf("한국어","외국어")
+
 
         //댓글창 프래그먼트 뷰페이저
         //var url = intent.getStringExtra("url")
@@ -44,7 +42,7 @@ class CommentListActivity : AppCompatActivity() {
         var comment_tablayout = findViewById<TabLayout>(R.id.comment_tablayout)
         val pagerAdapter = PagerFragmentStateAdapter(this, url)
 
-        server(this)
+        //server(this)
 
         comment_viewPager.adapter = pagerAdapter
         // TabLayout attach

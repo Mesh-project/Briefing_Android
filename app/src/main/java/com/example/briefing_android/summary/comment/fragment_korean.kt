@@ -24,7 +24,6 @@ import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
-
 class fragment_korean(url: String) : Fragment() {
     private lateinit var FKrecyclerview: RecyclerView
     private var mpadapter1: rv_Adapter = rv_Adapter(R.layout.comment_item2)
@@ -60,6 +59,7 @@ class fragment_korean(url: String) : Fragment() {
 
         progressON()
         server(thiscontext)
+        Log.v("프래그먼트(한국어)", "서버끝")
 
         // 악플 필터링 라디오버튼 이벤트
         radioGroup = korean_listview.findViewById(R.id.radioGroup)
@@ -75,6 +75,24 @@ class fragment_korean(url: String) : Fragment() {
             Toast.makeText(thiscontext, "긍정 댓글만 보기", Toast.LENGTH_SHORT).show()
         }
 
+        //더미
+        commentList.add(
+                CommentItem(
+                        it_username = "어쩌구",
+                        it_date = "2021.08.20",
+                        it_comment = "댓글내용입니다아0.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.댓글내용입니다.",
+                        it_likecount = 123,
+                        it_emotion = "긍정",
+                        it_emotionp = "12.34%"
+                )
+        )
+        FKrecyclerview.adapter = mpadapter1
+        //리사이클러뷰 배치
+        val lm = LinearLayoutManager(thiscontext)
+        FKrecyclerview.layoutManager = lm
+        mpadapter1.data = commentList
+        mp_datalist.add(mpadapter1.data)
+
         return korean_listview
     }
 
@@ -86,7 +104,6 @@ class fragment_korean(url: String) : Fragment() {
         Log.v("korean comment url1", url)
 
         callcommentpost.safeEnqueue {
-            Log.v("댓글 서버(한국어)", "성공???")
             if (it.isSuccessful) {
                 Log.v("댓글 서버(한국어)", "성공")
                 progressOFF()
@@ -128,6 +145,8 @@ class fragment_korean(url: String) : Fragment() {
                 FKrecyclerview.layoutManager = lm
                 mpadapter1.data = commentList
                 mp_datalist.add(mpadapter1.data)
+
+
             }
         }
         mpadapter1.notifyDataSetChanged()

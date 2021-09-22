@@ -42,16 +42,18 @@ class fragment_etc(url:String) : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.v("프래그먼트(그외)", "진입")
         var etc_listview = inflater.inflate(R.layout.etc_list, container, false)
         var thiscontext = mContext!!
         FErecyclerview = etc_listview.findViewById(R.id.etc_recyclerview)
 
         progressON()
-        server(thiscontext)
+        //server_etc(thiscontext)
+        Log.v("프래그먼트(그외)", "서버끝")
 
         return etc_listview
     }
-    private fun server(thiscontext: Context){
+    private fun server_etc(thiscontext: Context){
         mpadapter3.notifyDataSetChanged()
 
         val callect_comment_List=UserServiceImpl.CommentService.requestURL(CommentURLRequest(url))

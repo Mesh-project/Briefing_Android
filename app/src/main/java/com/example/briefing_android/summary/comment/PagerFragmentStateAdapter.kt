@@ -10,7 +10,7 @@ class PagerFragmentStateAdapter(fragmentActivity: FragmentActivity,url:String): 
     val url =url
 
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -19,13 +19,9 @@ class PagerFragmentStateAdapter(fragmentActivity: FragmentActivity,url:String): 
                 Log.v("한국어 fragment", "호출")
                 fragment_korean(url)
             }
-            1 -> {
-                Log.v("영어 fragment", "호출")
-                fragment_english(url)
-            }
-            else-> {
-                Log.v("그외 fragment", "호출")
-                fragment_etc(url)
+            else -> {
+                Log.v("외국어 fragment", "호출")
+                fragment_foreign(url)
             }
         }
     }
