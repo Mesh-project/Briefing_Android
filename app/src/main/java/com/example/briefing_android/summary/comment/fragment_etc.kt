@@ -1,5 +1,6 @@
 package com.example.briefing_android.summary.comment
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
@@ -26,8 +27,15 @@ class fragment_etc(url:String) : Fragment(){
     private var mpadapter3: rv_Adapter = rv_Adapter(R.layout.comment_item2)
     private lateinit var progressDialog: AppCompatDialog
     private var mp_datalist = ArrayList<ArrayList<CommentItem>>()
-
     var url = url
+
+    var activity: Activity? = null
+    private var mContext: Context? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext=context
+        if (context is Activity) activity = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +43,7 @@ class fragment_etc(url:String) : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         var etc_listview = inflater.inflate(R.layout.etc_list, container, false)
-        var thiscontext = container!!.getContext()
+        var thiscontext = mContext!!
         FErecyclerview = etc_listview.findViewById(R.id.etc_recyclerview)
 
         progressON()

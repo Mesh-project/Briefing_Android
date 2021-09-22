@@ -1,5 +1,6 @@
 package com.example.briefing_android.summary.comment
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
@@ -12,6 +13,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -23,10 +27,19 @@ import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
 class fragment_english(url: String) : Fragment() {
     private lateinit var FENrecyclerview: RecyclerView
+    private lateinit var viewModel: SharedServerModel
     private var mpadapter2: rv_Adapter = rv_Adapter(R.layout.comment_item2)
     private lateinit var progressDialog: AppCompatDialog
-    var mp_datalist = ArrayList<ArrayList<CommentItem>>()
+    private var mp_datalist = ArrayList<ArrayList<CommentItem>>()
     var url = url
+
+    var activity: Activity? = null
+    private var mContext: Context? = null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext=context
+        if (context is Activity) activity = context
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,11 +47,30 @@ class fragment_english(url: String) : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         var english_listview = inflater.inflate(R.layout.english_list, container, false)
-        var thiscontext = container!!.getContext()
+        var thiscontext =mContext!!
         FENrecyclerview = english_listview.findViewById(R.id.english_recyclerview)
 
         progressON()
-        server(thiscontext)
+
+
+        //리사이클러뷰의 어댑터 세팅
+        FENrecyclerview.adapter = mpadapter2
+        //리사이클러뷰 배치
+        val lm = LinearLayoutManager(thiscontext)
+        FENrecyclerview.layoutManager = lm
+
+        mpadapter2.notifyDataSetChanged()
+
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedServerModel::class.java)
+
+        viewModel.englishlist.observe(viewLifecycleOwner, Observer{
+            mpadapter2.data = it
+            Log.v("list 전달","성공") // 뷰모델에서 값 잘 받아왔는지 확인
+            progressOFF()
+        })
+        mp_datalist.add(mpadapter2.data)
+        mpadapter2.notifyDataSetChanged()
+        //server(thiscontext)
 
         return english_listview
     }

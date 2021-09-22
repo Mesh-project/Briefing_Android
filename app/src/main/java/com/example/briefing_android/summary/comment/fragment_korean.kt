@@ -1,5 +1,6 @@
 package com.example.briefing_android.summary.comment
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
@@ -9,7 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageView
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +24,7 @@ import com.example.briefing_android.api.safeEnqueue
 import com.example.briefing_android.summary.recyclerview_comment.CommentItem
 import com.example.briefing_android.summary.recyclerview_comment.rv_Adapter
 
+
 class fragment_korean(url: String) : Fragment() {
     private lateinit var FKrecyclerview: RecyclerView
     private var mpadapter1: rv_Adapter = rv_Adapter(R.layout.comment_item2)
@@ -31,15 +35,27 @@ class fragment_korean(url: String) : Fragment() {
     private lateinit var progressDialog: AppCompatDialog
     lateinit var radioGroup : RadioGroup
 
+    var activity: Activity? = null
+    private var mContext: Context?=null
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        Log.v("onAttach", "호출")
+        mContext=context
+        if (context is Activity) {
+            activity = context
+        }
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
 
-
+        Log.v("onCreateView", "호출")
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
-        var thiscontext = container!!.getContext()
+        //var thiscontext = container!!.getContext()
+        var thiscontext = mContext!!
         FKrecyclerview = korean_listview.findViewById(R.id.korean_recyclerview)
 
         progressON()
