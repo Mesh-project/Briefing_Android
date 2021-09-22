@@ -36,5 +36,11 @@ data class HistoryDetailData(
         @SerializedName("video_time")
         val video_time : String,
         @SerializedName("topic")
-        val topic : String
+        val topic : String,
+        @SerializedName("script")
+        val script : String,
+        @SerializedName("wordcloud")
+        val wordcloud : String,
+        @SerializedName("topword")
+        val topword : List<String>
 )

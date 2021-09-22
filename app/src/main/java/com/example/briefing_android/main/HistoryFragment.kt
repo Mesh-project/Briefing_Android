@@ -35,7 +35,7 @@ class HistoryFragment : Fragment() {
         //var thiscontext = container!!.getContext()
         rv = view.findViewById(R.id.history_recyclerView)
 
-        user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
+        //user_idx = MySharedPreferences.getUserIdx(mContext).toInt()
         Log.v("histroyfragment 확인","user_idx"+user_idx)
 
         /*test
@@ -87,7 +87,7 @@ class HistoryFragment : Fragment() {
         myhistorylist.add(rv_adapter.data)
         */
 
-        //server(mContext)
+        server(mContext)
 
         return view
         //return inflater.inflate(R.layout.fragment_slide_page_main, container, false)

@@ -68,7 +68,7 @@ class SummaryActivity2: AppCompatActivity() {
         Log.v("summaryactivity 확인","user_idx="+user_idx)
 
         analysis_idx = intent.getIntExtra("analysis_idx",0)
-        Log.v("summaryactivity 확인","analysis+idx="+user_idx.toString())
+        Log.v("summaryactivity 확인","analysis_idx="+analysis_idx.toString())
 
 
         tv_title = findViewById(R.id.tv_title)
@@ -81,13 +81,13 @@ class SummaryActivity2: AppCompatActivity() {
         //6. 서버 불러오기
         progressON()
 
-        if(analysis_idx!=0){
-            history_server(context=this)
-        }
-        else{
+        if(analysis_idx==0){
             Log.v("분석 서버","호출")
             Log.v("useridx 확인",user_idx.toString())
             server(context = this)
+        }else{
+            Log.v("히스토리 서버","호출")
+            history_server(context=this)
         }
 
         btn_back = findViewById(R.id.btn_back)
@@ -205,13 +205,15 @@ class SummaryActivity2: AppCompatActivity() {
                         .into(img_thumbnail)
                 tv_time.setText(VideoInfo.video_time)
                 tv_summary.setText(VideoInfo.topic)
+                script=VideoInfo.script
+                topkey=VideoInfo.topword
 
                 url=VideoInfo.url
                 Log.v("history_Detail 확인",VideoInfo.url)
                 btn_comment.setOnClickListener(
                         View.OnClickListener {
                             val intent = Intent(this, CommentListActivity::class.java)
-                            Log.v("history_Detail 확인2",VideoInfo.url.substring(32,VideoInfo.url.length))
+                            Log.v("history_Detail 댓글보기 버튼 url",VideoInfo.url.substring(32,VideoInfo.url.length))
                             intent.putExtra("url", VideoInfo.url.substring(32,VideoInfo.url.length))
                             startActivity(intent)
                         }
