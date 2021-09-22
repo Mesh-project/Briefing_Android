@@ -87,7 +87,7 @@ class HistoryFragment : Fragment() {
         myhistorylist.add(rv_adapter.data)
         */
 
-        //server(mContext)
+        server(mContext)
 
         return view
         //return inflater.inflate(R.layout.fragment_slide_page_main, container, false)
