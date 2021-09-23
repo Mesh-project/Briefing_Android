@@ -42,5 +42,7 @@ data class HistoryDetailData(
         @SerializedName("wordcloud")
         val wordcloud : String,
         @SerializedName("topword")
-        val topword : List<String>
+        val topword : String,
+        @SerializedName("script_predict")
+        val script_predict : String
 )

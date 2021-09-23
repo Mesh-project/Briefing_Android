@@ -7,6 +7,10 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.briefing_android.R
 import com.example.briefing_android.api.CommentURLRequest
@@ -30,9 +34,7 @@ class CommentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comment_list)
 
 
-        //var tab_text : List<String> = listOf("한국어","영어","그 외")
-        var tab_text : List<String> = listOf("한국어","외국어")
-
+        var tab_text : List<String> = listOf("한국어","영어","그 외")
 
         //댓글창 프래그먼트 뷰페이저
         //var url = intent.getStringExtra("url")
@@ -42,14 +44,11 @@ class CommentListActivity : AppCompatActivity() {
         var comment_tablayout = findViewById<TabLayout>(R.id.comment_tablayout)
         val pagerAdapter = PagerFragmentStateAdapter(this, url)
 
-        //server(this)
-
         comment_viewPager.adapter = pagerAdapter
         // TabLayout attach
         TabLayoutMediator(comment_tablayout, comment_viewPager) { tab, position ->
             tab.text = tab_text[position]
         }.attach()
-
 
 
 
@@ -68,31 +67,4 @@ class CommentListActivity : AppCompatActivity() {
 
     }
 
-    private fun server(thiscontext: Context) {
-
-        val english_comment_List = UserServiceImpl.CommentService.requestURL(CommentURLRequest(url))
-        english_comment_List.safeEnqueue {
-            if (it.isSuccessful) {
-                Log.v("영어 서버", "성공")
-                var english_List = arrayListOf<CommentItem>()
-                val english__Comment = it.body()!!.etc_data
-
-                for (i in 0 until english__Comment.size) {
-                    if (english__Comment[i].sort.equals("영어")) {
-                        english_List.add(
-                                CommentItem(
-                                        it_username = english__Comment[i].nickname,
-                                        it_date = english__Comment[i].writetime.substring(0, 10),
-                                        it_comment = english__Comment[i].comment,
-                                        it_likecount = english__Comment[i].likecount,
-                                        it_emotion = "",
-                                        it_emotionp = ""
-                                )
-                        )
-                    }
-                }
-                viewmodel.englishlist.postValue(english_List)
-            }
-        }
-    }
 }

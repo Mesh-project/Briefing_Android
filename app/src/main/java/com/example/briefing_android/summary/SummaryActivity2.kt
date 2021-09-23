@@ -49,7 +49,7 @@ class SummaryActivity2: AppCompatActivity() {
     var analysis_idx:Int= 0 //히스토리에서 받아오는 id
 
     var script : String=""
-    var topkey = List<String>(3,{""})
+    var topkey = List<String>(5,{""})
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,6 +117,8 @@ class SummaryActivity2: AppCompatActivity() {
             intent.putExtra("top1", topkey.get(0))
             intent.putExtra("top2", topkey.get(1))
             intent.putExtra("top3", topkey.get(2))
+            intent.putExtra("top4", topkey.get(3))
+            intent.putExtra("top5", topkey.get(4))
             startActivity(intent)
         }
 
@@ -173,7 +175,7 @@ class SummaryActivity2: AppCompatActivity() {
                 tv_time.setText(VideoInfo.video_time)
                 tv_summary.setText(VideoInfo.topic)
                 script=VideoInfo.script
-                topkey=VideoInfo.topword
+                topkey=VideoInfo.topword.split(" ")
             }
 
         }
@@ -182,9 +184,9 @@ class SummaryActivity2: AppCompatActivity() {
 
     fun history_server(context: Context){
         //-------------server-----------------
-        print("history detail 함수호출")
+        Log.v("history detail","함수호출")
         val analysispost = UserServiceImpl.HistroyDetailService.responseHistory(analysis_idx)
-
+        Log.v("history detail","22222222")
         analysispost.safeEnqueue {
             Log.v("history detail 서버","들어옴")
             if(it.isSuccessful){
@@ -203,10 +205,14 @@ class SummaryActivity2: AppCompatActivity() {
                         .load(VideoInfo.thumbnail)
                         .override(1000,450)
                         .into(img_thumbnail)
+                Glide.with(this)
+                        .load(VideoInfo.wordcloud)
+                        .override(1200,800)
+                        .into(img_wordcloud)
                 tv_time.setText(VideoInfo.video_time)
                 tv_summary.setText(VideoInfo.topic)
                 script=VideoInfo.script
-                topkey=VideoInfo.topword
+                topkey=VideoInfo.topword.split(" ")
 
                 url=VideoInfo.url
                 Log.v("history_Detail 확인",VideoInfo.url)
