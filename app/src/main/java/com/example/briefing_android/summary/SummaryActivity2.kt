@@ -41,6 +41,8 @@ class SummaryActivity2: AppCompatActivity() {
 
     private lateinit var progressDialog: AppCompatDialog
 
+    private lateinit var em_icon2 : ImageView
+    private lateinit var emotion_p2 : TextView
 
     var url: String =""
 
@@ -77,6 +79,8 @@ class SummaryActivity2: AppCompatActivity() {
         tv_summary = findViewById(R.id.tv_summary)
         tv_time=findViewById(R.id.tv_time)
         img_wordcloud=findViewById(R.id.img_wordcloud)
+        em_icon2=findViewById(R.id.em_icon2)
+        emotion_p2=findViewById(R.id.emotion_p2)
 
         //6. 서버 불러오기
         progressON()
@@ -139,16 +143,14 @@ class SummaryActivity2: AppCompatActivity() {
                 startActivity(intent)
             }
         )
-
-
     }
 
     fun server(context: Context){
         //-------------server-----------------
-        print("함수호출")
+        Log.v("함수호출","분석")
         Log.v("anal_str url= ",anal_str)
         val analysispost = UserServiceImpl.AnalysisService.requestURL(urlRequest = URLRequest(user_idx,anal_str))
-
+        Log.v("22222",anal_str)
         analysispost.safeEnqueue {
             Log.v("분석 서버","들어옴")
             if(it.isSuccessful){
@@ -165,21 +167,23 @@ class SummaryActivity2: AppCompatActivity() {
                 }
                 Glide.with(this)
                         .load(VideoInfo.thumbnail)
-                        .override(1000,450)
-                        .into(img_thumbnail)
+                        .centerCrop()
+                    .into(img_thumbnail)
 
                 Glide.with(this)
                         .load(VideoInfo.wordcloud)
                         .override(1200,800)
-                        .into(img_wordcloud)
+                       .into(img_wordcloud)
                 tv_time.setText(VideoInfo.video_time)
                 tv_summary.setText(VideoInfo.topic)
                 script=VideoInfo.script
                 topkey=VideoInfo.topword.split(" ")
-            }
 
+                // 주제 긍정부정 받아오기 // '긍정 xx.xx%'
+                emotionIcon(VideoInfo.script_predict.substring(0,2)) // 긍정부정 이모티콘 넣기
+                emotion_p2.setText(VideoInfo.script_predict.substring(3, VideoInfo.script_predict.length)) // xx.xx%까지 잘라냄
+            }
         }
-        //---------------------------------------
     }
 
     fun history_server(context: Context){
@@ -203,7 +207,7 @@ class SummaryActivity2: AppCompatActivity() {
                 }
                 Glide.with(this)
                         .load(VideoInfo.thumbnail)
-                        .override(1000,450)
+                    .centerCrop()
                         .into(img_thumbnail)
                 Glide.with(this)
                         .load(VideoInfo.wordcloud)
@@ -213,6 +217,11 @@ class SummaryActivity2: AppCompatActivity() {
                 tv_summary.setText(VideoInfo.topic)
                 script=VideoInfo.script
                 topkey=VideoInfo.topword.split(" ")
+
+                // 주제 긍정부정 받아오기 // '긍정 xx.xx%'
+                emotionIcon(VideoInfo.script_predict.substring(0,2)) // 긍정부정 이모티콘 넣기
+                emotion_p2.setText(VideoInfo.script_predict.substring(3, VideoInfo.script_predict.length)) // xx.xx%까지 잘라냄
+
 
                 url=VideoInfo.url
                 Log.v("history_Detail 확인",VideoInfo.url)
@@ -226,9 +235,7 @@ class SummaryActivity2: AppCompatActivity() {
                 )
             }
         }
-        //---------------------------------------
     }
-
 
     fun progressON(){
         progressDialog = AppCompatDialog(this)
@@ -248,6 +255,17 @@ class SummaryActivity2: AppCompatActivity() {
     fun progressOFF(){
         if(progressDialog != null && progressDialog.isShowing()){
             progressDialog.dismiss()
+        }
+    }
+    fun emotionIcon(emotion:String) {
+        if (emotion == "긍정") {
+            Glide.with(this)
+                .load(R.drawable.happy)
+                .into(em_icon2)
+        } else if (emotion == "부정") {
+            Glide.with(this)
+                .load(R.drawable.sad)
+                .into(em_icon2)
         }
     }
 }
