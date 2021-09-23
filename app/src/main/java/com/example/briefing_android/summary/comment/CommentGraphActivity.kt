@@ -25,8 +25,8 @@ class CommentGraphActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment_graph)
 
-        var piechart: PieChart = findViewById(R.id.piechart)
-        var piechart2: PieChart = findViewById(R.id.piechart2)
+        var piechart: PieChart = findViewById(R.id.piechart2)
+        var piechart2: PieChart = findViewById(R.id.piechart)
         val yValues = ArrayList<PieEntry>()
         val chart2_yValues = ArrayList<PieEntry>()
         var name_list = listOf<String>("한국어", "영어", "그외", "긍정", "부정")
@@ -42,7 +42,7 @@ class CommentGraphActivity : AppCompatActivity() {
         piechart.setDragDecelerationFrictionCoef(0.95f)
         piechart.setDrawHoleEnabled(false)
         piechart.setHoleColor(Color.WHITE)
-        piechart.setTransparentCircleRadius(61f)
+        piechart.setTransparentCircleRadius(70f)
 
         // piechart2
         piechart2.setUsePercentValues(true)
@@ -51,7 +51,7 @@ class CommentGraphActivity : AppCompatActivity() {
         piechart2.setDragDecelerationFrictionCoef(0.95f)
         piechart2.setDrawHoleEnabled(false)
         piechart2.setHoleColor(Color.WHITE)
-        piechart2.setTransparentCircleRadius(61f)
+        piechart2.setTransparentCircleRadius(70f)
 
         // server
         var url = intent.getStringExtra("url")
@@ -76,11 +76,12 @@ class CommentGraphActivity : AppCompatActivity() {
                 }
             }
 
+            /*
             val description = Description()
             description.setText("Language") //라벨
-            description.setPosition(200f, 100f)
+            description.setPosition(600f, 100f)
             description.setTextSize(20f)
-            piechart.setDescription(description)
+            piechart.setDescription(description)*/
             piechart.animateY(1000, Easing.EaseInOutCubic) //애니메이션
 
             val dataSet = PieDataSet(yValues, "")
@@ -103,11 +104,12 @@ class CommentGraphActivity : AppCompatActivity() {
             piechart.setData(data)
 
 
+            /*
             val description2 = Description()
             description2.setText("Emotion") //라벨
-            description2.setPosition(450f, 50f)
-            description2.setTextSize(15f)
-            piechart2.setDescription(description2)
+            description2.setPosition(600f, 100f)
+            description2.setTextSize(20f)
+            piechart2.setDescription(description2)*/
             piechart2.animateY(1000, Easing.EaseInOutCubic) //애니메이션
 
             val dataSet2 = PieDataSet(chart2_yValues, "")
@@ -125,6 +127,7 @@ class CommentGraphActivity : AppCompatActivity() {
             data2.setValueTextColor(Color.BLACK)
 
             piechart2.legend.isEnabled = false
+
             piechart2.setData(data2)
 
         }

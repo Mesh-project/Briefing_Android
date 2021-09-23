@@ -22,12 +22,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CommentListActivity : AppCompatActivity() {
-    var url = "sWuerIFLjjk"
-    var commentList = arrayListOf<CommentItem>()
-    var positive_commentList = arrayListOf<CommentItem>()
-    private var mpadapter1: rv_Adapter = rv_Adapter(R.layout.comment_item2)
-    var mp_datalist = ArrayList<ArrayList<CommentItem>>()
-    private lateinit var viewmodel: SharedServerModel
+    //var url = "sWuerIFLjjk"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +32,7 @@ class CommentListActivity : AppCompatActivity() {
         var tab_text : List<String> = listOf("한국어","외국어")
 
         //댓글창 프래그먼트 뷰페이저
-        //var url = intent.getStringExtra("url")
+        var url = intent.getStringExtra("url")
 
         //val comment_fragmentAdapter = Comment_Viewpager_adapter(supportFragmentManager, url)
         var comment_viewPager = findViewById<ViewPager2>(R.id.comment_viewPager)

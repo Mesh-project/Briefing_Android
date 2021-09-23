@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Briefing_Android"
         android:usesCleartextTraffic="true">
-        <activity android:name=".summary.comment.CommentGraphActivity" />
+        <activity android:name=".summary.comment.CommentGraphActivity" >
+
+        </activity>
         <activity android:name=".summary.comment.CommentListActivity">
 
         </activity>
