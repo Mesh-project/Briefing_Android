@@ -34,7 +34,7 @@ class CommentListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comment_list)
 
 
-        var tab_text : List<String> = listOf("한국어","영어","그 외")
+        var tab_text : List<String> = listOf("한국어","외국어")
 
         //댓글창 프래그먼트 뷰페이저
         //var url = intent.getStringExtra("url")

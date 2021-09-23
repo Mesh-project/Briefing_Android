@@ -76,6 +76,7 @@ class fragment_korean(url: String) : Fragment() {
         }
 
         //더미
+        /*
         commentList.add(
                 CommentItem(
                         it_username = "어쩌구",
@@ -92,6 +93,7 @@ class fragment_korean(url: String) : Fragment() {
         FKrecyclerview.layoutManager = lm
         mpadapter1.data = commentList
         mp_datalist.add(mpadapter1.data)
+        */
 
         return korean_listview
     }
