@@ -14,14 +14,14 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".summary.comment.CommentGraphActivity" />
         <activity android:name=".summary.comment.CommentListActivity">
+
+        </activity>
+        <activity android:name=".summary.body_text"/>
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".summary.body_text"/>
-        <activity android:name=".main.MainActivity">
-
         </activity>
         <activity android:name=".summary.SummaryActivity2">
         </activity>

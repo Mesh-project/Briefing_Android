@@ -52,25 +52,7 @@ class fragment_english(url: String) : Fragment() {
 
         progressON()
 
-
-        //리사이클러뷰의 어댑터 세팅
-        FENrecyclerview.adapter = mpadapter2
-        //리사이클러뷰 배치
-        val lm = LinearLayoutManager(thiscontext)
-        FENrecyclerview.layoutManager = lm
-
-        mpadapter2.notifyDataSetChanged()
-
-        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedServerModel::class.java)
-
-        viewModel.englishlist.observe(viewLifecycleOwner, Observer{
-            mpadapter2.data = it
-            Log.v("list 전달","성공") // 뷰모델에서 값 잘 받아왔는지 확인
-            progressOFF()
-        })
-        mp_datalist.add(mpadapter2.data)
-        mpadapter2.notifyDataSetChanged()
-        //server(thiscontext)
+        server(thiscontext)
 
         return english_listview
     }

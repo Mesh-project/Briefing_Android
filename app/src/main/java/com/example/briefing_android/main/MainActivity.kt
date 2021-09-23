@@ -9,7 +9,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.briefing_android.R
 import com.example.briefing_android.sign.MySharedPreferences
-import com.example.briefing_android.summary.comment.CollectionDemoFragment
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 
 private const val NUM_PAGES = 2 // 페이지 수를 정해둠
