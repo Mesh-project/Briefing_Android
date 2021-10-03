@@ -15,6 +15,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.briefing_android.R
@@ -33,6 +34,7 @@ class fragment_korean(url: String) : Fragment() {
     private var url = url
     private lateinit var progressDialog: AppCompatDialog
     lateinit var radioGroup : RadioGroup
+    private lateinit var viewModel: SharedServerModel
 
     var activity: Activity? = null
     private var mContext: Context?=null
@@ -50,6 +52,8 @@ class fragment_korean(url: String) : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()) .get(SharedServerModel::class.java)
 
         Log.v("onCreateView", "호출")
         var korean_listview = inflater.inflate(R.layout.korean_list, container, false)
@@ -112,10 +116,24 @@ class fragment_korean(url: String) : Fragment() {
                 val korean_CommentList = it.body()!!.korean_data
                 Log.v("intent", "크기 데이터 보냄")
 
+                val chart_count = it.body()!!.count
+                for (i in 0 until chart_count.size) {
+                    Log.v("chart_count[i]",  ": "+ chart_count[i])
+                    when (i){
+                        0->viewModel.koreansize.value = chart_count[0]
+                        1->viewModel.englishsize.value = chart_count[1]
+                        2->viewModel.etcsize.value = chart_count[2]
+                        3->viewModel.positivesize.value = chart_count[3]
+                        4->viewModel.negativesize.value = chart_count[4]
+                    }
+
+                }
+
                 for (i in 0 until korean_CommentList.size) {
                     var str = korean_CommentList[i].predict // 'xx.xx% 긍정' 식으로
                     var emotion = str.substring(str.length - 2, str.length) // 긍정부정만 잘라냄
                     var percent = str.substring(0, str.length - 3) // xx.xx%까지 잘라냄
+
 
                     commentList.add(
                             CommentItem(
