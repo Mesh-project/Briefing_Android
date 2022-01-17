@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -82,16 +83,33 @@ class SummaryActivity2: AppCompatActivity() {
         em_icon2=findViewById(R.id.em_icon2)
         emotion_p2=findViewById(R.id.emotion_p2)
 
+
         //6. 서버 불러오기
-        progressON()
+        Log.v("summary","로딩시작")
+        //progressON()
+
+        Log.v("summary","setData")
+
 
         if(analysis_idx==0){
             Log.v("분석 서버","호출")
             Log.v("useridx 확인",user_idx.toString())
-            server(context = this)
+            //server(context = this)
+            Setdata()
         }else{
             Log.v("히스토리 서버","호출")
-            history_server(context=this)
+            //history_server(context=this)
+            tv_title.setText("[재택플러스] '연봉보다 부럽다'?‥'구내식당'의 변신")
+            tv_channelname.setText("MBCNEWS")
+            img_thumbnail.setImageResource(R.drawable.thumbnail)
+            img_wordcloud.setImageResource(R.drawable.wordcloud2)
+            tv_time.setText("00:02:01")
+            tv_summary.setText(
+                "한발 더 나아가 회사 식단으로 살도 빼고 혈당도 관히해주는 헬스케어 서비스를 제공하는 것도 있다고 하는데 코로나 이후로 회식이다 단체 식사가 어려워지면서 구내식당을 이용하는 직장인들이 자연스럽게 늘고 있다보니 생긴 또 다른 현상 중 하나인 셈인데 올해 사조원대로 훌쩍 성장한 직장 등 단체 급식 업체 시장의 경쟁도 점점 치열해지고 있다고 합니다. 이른바 성지명단에 오르기 위한 조건과 기준도 나름 있다는데요."
+            )
+            em_icon2.setImageResource(R.drawable.happy)
+            emotion_p2.setText("61.47%")
+
         }
 
         btn_back = findViewById(R.id.btn_back)
@@ -118,11 +136,19 @@ class SummaryActivity2: AppCompatActivity() {
         btn_article.setOnClickListener {
             var intent = Intent(this, articleActivity::class.java)
             Log.v("topkey 확인",topkey.get(0))
+            /*
             intent.putExtra("top1", topkey.get(0))
             intent.putExtra("top2", topkey.get(1))
             intent.putExtra("top3", topkey.get(2))
             intent.putExtra("top4", topkey.get(3))
             intent.putExtra("top5", topkey.get(4))
+            */
+
+            intent.putExtra("top1", "구내식당")
+            intent.putExtra("top2", "직장")
+            intent.putExtra("top3", "직장인")
+            intent.putExtra("top4", "명단")
+            intent.putExtra("top5", "회사")
             startActivity(intent)
         }
 
@@ -268,4 +294,29 @@ class SummaryActivity2: AppCompatActivity() {
                 .into(em_icon2)
         }
     }
+
+    //더미데이터 넣기
+    fun Setdata(){
+        Log.v("setData","함수 들어옴")
+        progressON()
+        Handler().postDelayed({
+            tv_title.setText("[재택플러스] '연봉보다 부럽다'?‥'구내식당'의 변신")
+            tv_channelname.setText("MBCNEWS")
+            img_thumbnail.setImageResource(R.drawable.thumbnail)
+            img_wordcloud.setImageResource(R.drawable.wordcloud2)
+            tv_time.setText("00:02:01")
+            tv_summary.setText(
+                "한발 더 나아가 회사 식단으로 살도 빼고 혈당도 관히해주는 헬스케어 서비스를 제공하는 것도 있다고 하는데 코로나 이후로 회식이다 단체 식사가 어려워지면서 구내식당을 이용하는 직장인들이 자연스럽게 늘고 있다보니 생긴 또 다른 현상 중 하나인 셈인데 올해 사조원대로 훌쩍 성장한 직장 등 단체 급식 업체 시장의 경쟁도 점점 치열해지고 있다고 합니다. 이른바 성지명단에 오르기 위한 조건과 기준도 나름 있다는데요."
+            )
+            em_icon2.setImageResource(R.drawable.happy)
+            emotion_p2.setText("61.47%")
+        },3000)
+
+
+        Log.v("summary","로딩 중지")
+        Handler().postDelayed({
+            progressOFF()
+        },4000)
+    }
+
 }

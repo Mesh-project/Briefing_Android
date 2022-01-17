@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/history_image"
-            android:layout_width="200dp"
+            android:layout_width="400dp"
             android:layout_height="200dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

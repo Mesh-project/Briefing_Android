@@ -11,10 +11,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        /*android:background="#C4DEFF"*/
+
         <ImageView
             android:id="@+id/img_thumbnail"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="230dp"
             android:background="#C4DEFF"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -39,7 +41,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:paddingRight="10dp"
-            android:text="0:00"
+            android:text=""
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="14dp"
@@ -97,6 +99,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:padding="5dp"
+                android:text=""
                 android:textSize="15dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -120,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textSize="20dp"
+                android:text=""
                 android:textColor="@color/gray1"
                 app:layout_constraintRight_toRightOf="@id/btn_content"
                 app:layout_constraintTop_toTopOf="@id/em_icon2"
@@ -146,6 +150,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:padding="5dp"
+                android:text=""
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_content" />

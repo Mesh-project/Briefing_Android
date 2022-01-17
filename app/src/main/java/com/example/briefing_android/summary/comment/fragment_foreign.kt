@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -57,8 +58,11 @@ class fragment_foreign(url: String) : Fragment() {
         btn_english.setText("영어")
         btn_etc.setText("그외")
 
-        progressON()
-        server(thiscontext)
+        Log.v("프래그먼트(외국어)", "로딩시작")
+        //progressON()
+        //server(thiscontext)
+
+
 
         // 악플 필터링 라디오버튼 이벤트
         radioGroup = foreign_listview.findViewById(R.id.radioGroup)
@@ -68,11 +72,26 @@ class fragment_foreign(url: String) : Fragment() {
                 mpadapter2.data = english_List
                 mpadapter2.notifyDataSetChanged()
                 Toast.makeText(thiscontext, "영어 댓글 보기", Toast.LENGTH_SHORT).show()
-            } else if (checkedId == R.id.comment_bad) // 악플제거 댓글 보기
+            }else if (checkedId == R.id.comment_bad) // 악플제거 댓글 보기
                 mpadapter2.data = ect_List
             mpadapter2.notifyDataSetChanged()
             Toast.makeText(thiscontext, "그외 댓글만 보기", Toast.LENGTH_SHORT).show()
         }
+
+        //더미
+        addenglishList()
+
+
+
+        //리사이클러뷰의 어댑터 세팅
+        FENrecyclerview.adapter = mpadapter2
+        //리사이클러뷰 배치
+        val lm = LinearLayoutManager(context)
+        FENrecyclerview.layoutManager = lm
+        mpadapter2.data = english_List
+        mp_datalist.add(mpadapter2.data)
+
+        //progressOFF()
 
         return foreign_listview
     }
@@ -151,5 +170,52 @@ class fragment_foreign(url: String) : Fragment() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss()
         }
+
+    }
+    fun addenglishList(){
+
+        progressON()
+        
+        Handler().postDelayed({
+            english_List.add(
+                CommentItem(
+                    it_username = "Tuwiti karera",
+                    it_date = "2021-09-24",
+                    it_comment = "AISURU.TOKYO/KARARE 18 years and over Youtube: This is fineSomeone: Says 'heck' Yourube: Be gone#",
+                    it_likecount = 0,
+                    it_emotion = "",
+                    it_emotionp = ""
+                )
+            )
+            english_List.add(
+                CommentItem(
+                    it_username = "Tuwiti karera",
+                    it_date = "2021-09-24",
+                    it_comment = "AISURU.TOKYO/KARARE 18 years and over Youtube: This is fineSomeone: Says 'heck' Yourube: Be gone#",
+                    it_likecount = 0,
+                    it_emotion = "",
+                    it_emotionp = ""
+                )
+            )
+            english_List.add(
+                CommentItem(
+                    it_username = "Tuwiti karera",
+                    it_date = "2021-09-24",
+                    it_comment = "AISURU.TOKYO/KARARE 18 years and over Youtube: This is fineSomeone: Says 'heck' Yourube: Be gone#",
+                    it_likecount = 0,
+                    it_emotion = "",
+                    it_emotionp = ""
+                )
+            )
+
+        },1000)
+
+        Handler().postDelayed({
+            progressOFF()
+            mpadapter2.notifyDataSetChanged()
+        },2000)
+    }
+    fun addectList(){
+
     }
 }

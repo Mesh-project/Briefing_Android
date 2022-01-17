@@ -66,6 +66,15 @@ class CommentListActivity : AppCompatActivity() {
         btn_graph.setOnClickListener {
             // 파이차트 분석으로 넘어가기
             val intent = Intent(this, CommentGraphActivity::class.java)
+
+            //더미
+            koreansize=20
+            englishsize=2
+            etcsize=0
+            positivesize=10
+            negativesize=10
+
+
             intent.putExtra("koreansize", koreansize)
             intent.putExtra("englishsize", englishsize)
             intent.putExtra("etcsize", etcsize)
