@@ -19,5 +19,5 @@
 - DB 관리
 
 ## Member
-- [나혜지](https://github.com/nhj7911)
+- [나혜지](https://github.com/ygreenb)
 - [여은지](https://github.com/eunnj)
